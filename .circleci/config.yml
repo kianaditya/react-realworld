@@ -1,0 +1,9 @@
+orbs:
+  cypress: cypress-io/cypress@1.3.0
+workflows:
+  build:
+    jobs:
+      - cypress/run:
+          executor: cypress/browsers-chrome69
+          browser: chrome
+          start: 'npm start'
