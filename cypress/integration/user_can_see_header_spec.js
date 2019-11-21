@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-describe("User can see header", () => {
+describe("User can see Header", () => {
   it("User can see all Header elements", () => {
     cy.visit("/");
     cy.get("[data-cy=Header]")
