@@ -4,14 +4,22 @@ const axios = require("axios");
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
+  const [tags, setTags] = useState([]);
   const fetchArticles = async () => {
     const response = await axios.get(
       "https://conduit.productionready.io/api/articles"
     );
     setArticles(response.data.articles);
   };
+  const fetchTags = async () => {
+    const response = await axios.get(
+      "https://conduit.productionready.io/api/tags"
+    );
+    setTags(response.data.tags);
+  };
   useEffect(() => {
     fetchArticles();
+    fetchTags();
   }, []);
   const renderArticles = articles.map((article, index) => {
     return (
@@ -36,6 +44,13 @@ const ArticleList = () => {
           <span>Read more...</span>
         </a>
       </div>
+    );
+  });
+  const renderTags = tags.map(tag => {
+    return (
+      <a href="" className="tag-pill tag-default">
+        {tag}
+      </a>
     );
   });
   return (
@@ -64,33 +79,7 @@ const ArticleList = () => {
             <div className="col-md-3">
               <div className="sidebar">
                 <p>Popular Tags</p>
-
-                <div className="tag-list">
-                  <a href="" className="tag-pill tag-default">
-                    programming
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    javascript
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    emberjs
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    angularjs
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    react
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    mean
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    node
-                  </a>
-                  <a href="" className="tag-pill tag-default">
-                    rails
-                  </a>
-                </div>
+                <div className="tag-list">{renderTags}</div>
               </div>
             </div>
           </div>
