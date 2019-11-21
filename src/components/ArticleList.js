@@ -23,7 +23,7 @@ const ArticleList = () => {
   }, []);
   const renderArticles = articles.map((article, index) => {
     return (
-      <div className="article-preview">
+      <div key={index} className="article-preview">
         <div className="article-meta">
           <a href="profile.html">
             <img src={article.author.image} />
@@ -46,11 +46,13 @@ const ArticleList = () => {
       </div>
     );
   });
-  const renderTags = tags.map(tag => {
+  const renderTags = tags.map((tag, index) => {
     return (
-      <a href="" className="tag-pill tag-default">
-        {tag}
-      </a>
+      <span key={index}>
+        <a href="" className="tag-pill tag-default">
+          {tag}
+        </a>
+      </span>
     );
   });
   return (
@@ -79,7 +81,7 @@ const ArticleList = () => {
             <div className="col-md-3">
               <div className="sidebar">
                 <p>Popular Tags</p>
-                <div className="tag-list">{renderTags}</div>
+                <div data-cy="tagList" className="tag-list">{renderTags}</div>
               </div>
             </div>
           </div>

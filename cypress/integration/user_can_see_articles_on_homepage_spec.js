@@ -7,6 +7,12 @@ describe("User can see articles on Homepage", () => {
       status: 200,
       response: "fixture:article_list.json"
     });
+    cy.route({
+      method: "GET",
+      url: "https://conduit.productionready.io/api/tags",
+      status: 200,
+      response: "fixture:tags.json"
+    });
     cy.visit("/");
     cy.get("[data-cy=allArticles]").should(
       "contain.text",
