@@ -1,19 +1,33 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 const axios = require("axios");
 
-const RegistrationForm = () => {
+const RegistrationForm = props => {
   const submitRegistration = async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const payload = {"user" : Object.fromEntries(formData)}
-    const response = await axios.post(
-      "https://conduit.productionready.io/api/users",
-      JSON.stringify(payload),
-     { headers: {
-        'Content-Type': 'application/json'
-    }}
-    );
-    
+    const payload = { user: Object.fromEntries(formData) };
+
+    try {
+      const response = await axios.post(
+        "https://conduit.productionready.io/api/users",
+        JSON.stringify(payload),
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      debugger
+      props.history.push({
+        pathname: '/',
+        state: {
+          signedIn: true
+        }
+      })
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="auth-page">
@@ -34,7 +48,7 @@ const RegistrationForm = () => {
                 type="text"
                 placeholder="Your Name"
                 data-cy="userName"
-                name='username'
+                name="username"
               />
 
               <input
@@ -42,14 +56,14 @@ const RegistrationForm = () => {
                 type="text"
                 placeholder="Email"
                 data-cy="email"
-                name='email'
+                name="email"
               />
               <input
                 className="form-control form-control-lg"
                 type="password"
                 placeholder="Password"
                 data-cy="password"
-                name='password'
+                name="password"
               />
               <button
                 className="btn btn-lg btn-primary pull-xs-right"
@@ -65,4 +79,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default withRouter(RegistrationForm);
