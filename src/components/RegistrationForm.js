@@ -1,6 +1,20 @@
 import React from "react";
+const axios = require("axios");
 
 const RegistrationForm = () => {
+  const submitRegistration = async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const payload = {"user" : Object.fromEntries(formData)}
+    const response = await axios.post(
+      "https://conduit.productionready.io/api/users",
+      JSON.stringify(payload),
+     { headers: {
+        'Content-Type': 'application/json'
+    }}
+    );
+    
+  };
   return (
     <div className="auth-page">
       <div className="container page">
@@ -14,20 +28,36 @@ const RegistrationForm = () => {
             {/* <ul className="error-messages">
               <li>That email is already taken</li>
             </ul> */}
-            <form>
-          <fieldset className="form-group">
-            <input className="form-control form-control-lg" type="text" placeholder="Your Name" data-cy='userName'/>
-          </fieldset>
-          <fieldset className="form-group">
-            <input className="form-control form-control-lg" type="text" placeholder="Email" data-cy='email' />
-          </fieldset>
-          <fieldset className="form-group">
-            <input className="form-control form-control-lg" type="password" placeholder="Password" data-cy='password' />
-          </fieldset>
-          <button className="btn btn-lg btn-primary pull-xs-right" data-cy='registerButton' >
-            Sign up
-          </button>
-        </form>
+            <form id="myForm" onSubmit={submitRegistration}>
+              <input
+                className="form-control form-control-lg"
+                type="text"
+                placeholder="Your Name"
+                data-cy="userName"
+                name='username'
+              />
+
+              <input
+                className="form-control form-control-lg"
+                type="text"
+                placeholder="Email"
+                data-cy="email"
+                name='email'
+              />
+              <input
+                className="form-control form-control-lg"
+                type="password"
+                placeholder="Password"
+                data-cy="password"
+                name='password'
+              />
+              <button
+                className="btn btn-lg btn-primary pull-xs-right"
+                data-cy="registerButton"
+              >
+                Sign up
+              </button>
+            </form>
           </div>
         </div>
       </div>

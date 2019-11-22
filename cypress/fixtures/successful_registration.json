@@ -1,0 +1,12 @@
+{
+  "user": {
+    "id": 76162,
+    "email": "coach@mail.com123",
+    "createdAt": "2019-11-22T20:12:17.055Z",
+    "updatedAt": "2019-11-22T20:12:17.062Z",
+    "username": "teacher@mail.com123",
+    "bio": null,
+    "image": null,
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NzYxNjIsInVzZXJuYW1lIjoidGVhY2hlckBtYWlsLmNvbTEyMyIsImV4cCI6MTU3OTYzNzUzN30.rMeqqiWCAhi6graUa4tzbWMrRal7vaMBvgzvnJSg91g"
+  }
+}
