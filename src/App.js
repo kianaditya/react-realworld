@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ArticleList from './components/ArticleList';
+import RegistrationForm from './components/RegistrationForm';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header/>
       <Switch>
         <Route exact path='/' render={() => <ArticleList/>}/>
+        <Route path='/signup' render={() =><RegistrationForm/>}/>
       </Switch>
       <Footer/>
     </div>

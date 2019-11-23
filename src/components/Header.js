@@ -1,15 +1,16 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 
 const Header = () => {
   return (
     <div data-cy="Header">
       <nav className="navbar navbar-light">
       <div className="container">
-        <a className="navbar-brand" href="index.html">conduit</a>
+        <Link className="navbar-brand" to="/">conduit</Link>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
             
-            <a className="nav-link active" href="">Home</a>
+            <Link className="nav-link active" href="/">Home</Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="">
@@ -22,7 +23,7 @@ const Header = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="">Sign up</a>
+            <Link data-cy="signUpLink" className="nav-link active" to='/signup'>Sign up</Link>
           </li>
         </ul>
       </div>
