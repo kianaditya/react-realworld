@@ -18,7 +18,6 @@ const RegistrationForm = props => {
           }
         }
       );
-      debugger
       props.history.push({
         pathname: '/',
         state: {

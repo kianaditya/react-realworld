@@ -10,7 +10,7 @@ const LoginForm = props => {
 
     try {
       const response = await axios.post(
-        "https://conduit.productionready.io/api/users",
+        "https://conduit.productionready.io/api/users/login",
         JSON.stringify(payload),
         {
           headers: {
@@ -18,7 +18,6 @@ const LoginForm = props => {
           }
         }
       );
-      debugger
       props.history.push({
         pathname: '/',
         state: {
