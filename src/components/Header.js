@@ -25,6 +25,9 @@ const Header = () => {
           <li className="nav-item">
             <Link data-cy="signUpLink" className="nav-link active" to='/signup'>Sign up</Link>
           </li>
+          <li className="nav-item">
+            <Link data-cy="loginLink" className="nav-link active" to='/login'>Log in</Link>
+          </li>
         </ul>
       </div>
     </nav>

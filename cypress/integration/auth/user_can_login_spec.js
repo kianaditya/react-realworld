@@ -10,7 +10,6 @@ describe("User can login", () => {
     cy.get("[data-cy=loginLink]").click();
     cy.url().should("contain", "/login");
     [
-      { field: "userName", text: "TestAccount" },
       { field: "email", text: "test@mail.com" },
       { field: "password", text: "password" }
     ].forEach(element => {

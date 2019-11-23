@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ArticleList from './components/ArticleList';
 import RegistrationForm from './components/RegistrationForm';
+import LoginForm from './components/LoginForm';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path='/' render={() => <ArticleList/>}/>
         <Route path='/signup' render={() =><RegistrationForm/>}/>
+        <Route path='/login' render={() =><LoginForm/>}/>
       </Switch>
       <Footer/>
     </div>
