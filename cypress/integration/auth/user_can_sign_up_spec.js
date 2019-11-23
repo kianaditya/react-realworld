@@ -17,6 +17,6 @@ describe("User can sign up", () => {
       cy.get(`[data-cy=${element.field}]`).type(element.text);
     });
     cy.get("[data-cy=registerButton]").click();
-    cy.url().should("contain", "/");
+    // cy.url().should("not.contain", "/signup");
   });
 });
