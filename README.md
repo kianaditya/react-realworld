@@ -2,16 +2,22 @@
 
 This repository is based on [this project](https://github.com/gothinkster/realworld).
 
+- React functional Components
+- React Hooks:
+  - `useState`
+  - `useEffect`
+  - `useContext`
+
 ## API Path
 
-  https://conduit.productionready.io/api
+https://conduit.productionready.io/api
 
 ## General Functionality
 
 - Authenticate users via JWT (login/signup pages + logout button on settings page)
-- CRU* users (sign up & settings page - no deleting required)
+- CRU\* users (sign up & settings page - no deleting required)
 - CRUD Articles
-- CR*D Comments on articles (no updating required)
+- CR\*D Comments on articles (no updating required)
 - GET and display paginated lists of articles
 - Favorite articles
 - Follow other users
@@ -203,7 +209,6 @@ If a request fails any validations, expect a 422 and errors in the following for
 
 404 for Not found requests, when a resource can't be found to fulfill the request
 
-
 ## Endpoints:
 
 ### Authentication:
@@ -211,6 +216,7 @@ If a request fails any validations, expect a 422 and errors in the following for
 `POST /api/users/login`
 
 Example request body:
+
 ```JSON
 {
   "user":{
@@ -224,12 +230,12 @@ No authentication required, returns a [User](#users-for-authentication)
 
 Required fields: `email`, `password`
 
-
 ### Registration:
 
 `POST /api/users`
 
 Example request body:
+
 ```JSON
 {
   "user":{
@@ -244,21 +250,18 @@ No authentication required, returns a [User](#users-for-authentication)
 
 Required fields: `email`, `username`, `password`
 
-
-
 ### Get Current User
 
 `GET /api/user`
 
 Authentication required, returns a [User](#users-for-authentication) that's the current user
 
-
-
 ### Update User
 
 `PUT /api/user`
 
 Example request body:
+
 ```JSON
 {
   "user":{
@@ -271,18 +274,13 @@ Example request body:
 
 Authentication required, returns the [User](#users-for-authentication)
 
-
 Accepted fields: `email`, `username`, `password`, `image`, `bio`
-
-
 
 ### Get Profile
 
 `GET /api/profiles/:username`
 
 Authentication optional, returns a [Profile](#profile)
-
-
 
 ### Follow user
 
@@ -292,8 +290,6 @@ Authentication required, returns a [Profile](#profile)
 
 No additional parameters required
 
-
-
 ### Unfollow user
 
 `DELETE /api/profiles/:username/follow`
@@ -301,8 +297,6 @@ No additional parameters required
 Authentication required, returns a [Profile](#profile)
 
 No additional parameters required
-
-
 
 ### List Articles
 
@@ -334,8 +328,6 @@ Offset/skip number of articles (default is 0):
 
 Authentication optional, will return [multiple articles](#multiple-articles), ordered by most recent first
 
-
-
 ### Feed Articles
 
 `GET /api/articles/feed`
@@ -343,7 +335,6 @@ Authentication optional, will return [multiple articles](#multiple-articles), or
 Can also take `limit` and `offset` query parameters like [List Articles](#list-articles)
 
 Authentication required, will return [multiple articles](#multiple-articles) created by followed users, ordered by most recent first.
-
 
 ### Get Article
 
@@ -374,8 +365,6 @@ Required fields: `title`, `description`, `body`
 
 Optional fields: `tagList` as an array of Strings
 
-
-
 ### Update Article
 
 `PUT /api/articles/:slug`
@@ -396,14 +385,11 @@ Optional fields: `title`, `description`, `body`
 
 The `slug` also gets updated when the `title` is changed
 
-
 ### Delete Article
 
 `DELETE /api/articles/:slug`
 
 Authentication required
-
-
 
 ### Add Comments to an Article
 
@@ -423,23 +409,17 @@ Authentication required, returns the created [Comment](#single-comment)
 
 Required field: `body`
 
-
-
 ### Get Comments from an Article
 
 `GET /api/articles/:slug/comments`
 
 Authentication optional, returns [multiple comments](#multiple-comments)
 
-
-
 ### Delete Comment
 
 `DELETE /api/articles/:slug/comments/:id`
 
 Authentication required
-
-
 
 ### Favorite Article
 
@@ -449,8 +429,6 @@ Authentication required, returns the [Article](#single-article)
 
 No additional parameters required
 
-
-
 ### Unfavorite Article
 
 `DELETE /api/articles/:slug/favorite`
@@ -458,8 +436,6 @@ No additional parameters required
 Authentication required, returns the [Article](#single-article)
 
 No additional parameters required
-
-
 
 ### Get Tags
 
