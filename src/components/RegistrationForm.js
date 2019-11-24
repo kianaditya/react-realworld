@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
+import { AppContext } from "../AppContext";
 const axios = require("axios");
 
 const RegistrationForm = props => {
+  const [state, setState] = useContext(AppContext);
   const submitRegistration = async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -18,12 +20,13 @@ const RegistrationForm = props => {
           }
         }
       );
+      setState(state => ({ ...state, isSignedIn: true }));
       props.history.push({
-        pathname: '/',
+        pathname: "/",
         state: {
           signedIn: true
         }
-      })
+      });
     } catch (error) {
       console.error(error);
     }
