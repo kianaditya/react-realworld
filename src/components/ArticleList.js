@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import Banner from "./Banner";
 import { AppContext } from "../AppContext";
 const axios = require("axios");
@@ -17,7 +18,7 @@ const ArticleList = () => {
       "https://conduit.productionready.io/api/tags"
     );
     // setTags(response.data.tags);
-    setState(state => ({ ...state, tags:response.data.tags }));
+    setState(state => ({ ...state, tags: response.data.tags }));
   };
   useEffect(() => {
     fetchArticles();
@@ -40,11 +41,20 @@ const ArticleList = () => {
             <i className="ion-heart"></i> {article.favoritesCount}
           </button>
         </div>
-        <a href="" className="preview-link">
+        {/* <a href="" className="preview-link">
           <h1 data-cy="article-title">{article.title}</h1>
           <p>{article.description}</p>
           <span>Read more...</span>
-        </a>
+        </a> */}
+        <Link
+          data-cy="signUpLink"
+          className="nav-link active"
+          to={`/article/${article.slug}`}
+        >
+          <h1 data-cy="article-title">{article.title}</h1>
+          <p>{article.description}</p>
+          <span>Read more...</span>
+        </Link>
       </div>
     );
   });
@@ -83,7 +93,9 @@ const ArticleList = () => {
             <div className="col-md-3">
               <div className="sidebar">
                 <p>Popular Tags</p>
-                <div data-cy="tagList" className="tag-list">{renderTags}</div>
+                <div data-cy="tagList" className="tag-list">
+                  {renderTags}
+                </div>
               </div>
             </div>
           </div>

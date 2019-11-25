@@ -16,9 +16,9 @@ describe("User can specific article", () => {
     cy.visit("/");
     cy.get("[data-cy=allArticles]").should(
       "contain.text",
-      "this a demo article"
+      "How to train your dragon"
     );
     cy.get("[data-cy=article-title]").first().click()
-    cy.url().should("contain","/article-slug")
+    cy.url().should("contain","/how-to-train-your-dragon")
   });
 });

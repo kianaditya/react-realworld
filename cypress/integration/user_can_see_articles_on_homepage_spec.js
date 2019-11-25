@@ -16,7 +16,7 @@ describe("User can see articles on Homepage", () => {
     cy.visit("/");
     cy.get("[data-cy=allArticles]").should(
       "contain.text",
-      "this a demo article"
+      "How to train your dragon"
     );
   });
 });
