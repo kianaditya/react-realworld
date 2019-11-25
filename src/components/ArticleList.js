@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Banner from "./Banner";
+import { AppContext } from "../AppContext";
 const axios = require("axios");
 
 const ArticleList = () => {
-  const [articles, setArticles] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [state, setState] = useContext(AppContext);
   const fetchArticles = async () => {
     const response = await axios.get(
       "https://conduit.productionready.io/api/articles"
     );
-    setArticles(response.data.articles);
+    // setArticles(response.data.articles);
+    setState(state => ({ ...state, articles: response.data.articles }));
   };
   const fetchTags = async () => {
     const response = await axios.get(
       "https://conduit.productionready.io/api/tags"
     );
-    setTags(response.data.tags);
+    // setTags(response.data.tags);
+    setState(state => ({ ...state, tags:response.data.tags }));
   };
   useEffect(() => {
     fetchArticles();
     fetchTags();
   }, []);
-  const renderArticles = articles.map((article, index) => {
+  const renderArticles = state.articles.map((article, index) => {
     return (
       <div key={index} className="article-preview">
         <div className="article-meta">
@@ -46,7 +48,7 @@ const ArticleList = () => {
       </div>
     );
   });
-  const renderTags = tags.map((tag, index) => {
+  const renderTags = state.tags.map((tag, index) => {
     return (
       <span key={index}>
         <a href="" className="tag-pill tag-default">
