@@ -2,7 +2,7 @@
   "articles": [
     {
       "title": "Title",
-      "slug": "title-wf1gcd",
+      "slug": "article-slug",
       "body": "ff",
       "createdAt": "2019-11-21T10:36:01.420Z",
       "updatedAt": "2019-11-21T10:36:01.420Z",

@@ -39,7 +39,7 @@ const ArticleList = () => {
           </button>
         </div>
         <a href="" className="preview-link">
-          <h1>{article.title}</h1>
+          <h1 data-cy="article-title">{article.title}</h1>
           <p>{article.description}</p>
           <span>Read more...</span>
         </a>
