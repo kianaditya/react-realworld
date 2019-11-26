@@ -4,17 +4,25 @@ const axios = require("axios");
 
 const SpecificArticle = props => {
   const [article, setArticle] = useState();
+  const [comments, setComments] = useState()
   const slug = props.history.location.pathname.split("/")[2];
   const fetchSpecificArticle = async () => {
     const response = await axios.get(
       `https://conduit.productionready.io/api/articles/${slug}`
     );
-    console.log(response.data.article);
     setArticle(response.data.article);
   };
+  const fetchComments = async () => {
+    const response = await axios.get(
+      `https://conduit.productionready.io/api/articles/${slug}/comments`
+    );
+    console.log(response.data.comments);
+    setComments(response.data.comments);
+  }
   // debugger;
   useEffect(() => {
     fetchSpecificArticle();
+    fetchComments();
   }, []);
   return (
     <div>
@@ -106,7 +114,7 @@ const SpecificArticle = props => {
                   </div>
                 </form>
 
-                <div class="card">
+                {/* <div class="card">
                   <div class="card-block">
                     <p class="card-text">
                       With supporting text below as a natural lead-in to
@@ -126,9 +134,9 @@ const SpecificArticle = props => {
                     </a>
                     <span class="date-posted">Dec 29th</span>
                   </div>
-                </div>
+                </div> */}
 
-                <div class="card">
+                {/* <div class="card">
                   <div class="card-block">
                     <p class="card-text">
                       With supporting text below as a natural lead-in to
@@ -152,7 +160,7 @@ const SpecificArticle = props => {
                       <i class="ion-trash-a"></i>
                     </span>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
