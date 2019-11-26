@@ -16,7 +16,6 @@ const SpecificArticle = props => {
     const response = await axios.get(
       `https://conduit.productionready.io/api/articles/${slug}/comments`
     );
-    console.log(response.data.comments);
     setComments(response.data.comments);
   }
   // debugger;
