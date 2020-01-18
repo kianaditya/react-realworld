@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import moment from 'moment'
 const axios = require("axios");
 
 const SpecificArticle = props => {
@@ -39,7 +40,7 @@ const SpecificArticle = props => {
                   <a href="" class="author">
                     {article.author.username}
                   </a>
-                  <span class="date">{article.updatedAt}</span>
+                  <span class="date">{moment(article.updatedAt).format("Do MMM Y")}</span>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary">
                   <i class="ion-plus-round"></i>
@@ -79,7 +80,7 @@ const SpecificArticle = props => {
                   <a href="" class="author">
                     {article.author.username}
                   </a>
-                  <span class="date">{article.updatedAt}</span>
+                  <span class="date">{moment(article.updatedAt).format("Do MMM Y")}</span>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary">
                   <i class="ion-plus-round"></i>
