@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "cypress": "^3.6.1",
+    "moment": "^2.24.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
@@ -15,8 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "yarn start --silent & cypress open",
+    "cy:run": "BROWSER=none yarn start & cypress run"
   },
   "eslintConfig": {
     "extends": "react-app"

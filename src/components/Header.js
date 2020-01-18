@@ -17,7 +17,7 @@ const Header = () => {
                 Home
               </Link>
             </li>
-            {state.isSignedIn && (
+            {state.currentUser.isSignedIn && (
               <>
                 <li className="nav-item">
                   <a className="nav-link" href="">
@@ -31,7 +31,7 @@ const Header = () => {
                 </li>
               </>
             )}
-            {!state.isSignedIn && (
+            {!state.currentUser.isSignedIn && (
               <>
                 <li className="nav-item">
                   <Link

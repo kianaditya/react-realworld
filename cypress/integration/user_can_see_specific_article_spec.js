@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-describe("User can see articles on Homepage", () => {
-  it("User can see all articles", () => {
+describe("User can specific article", () => {
+  it("User can see specific article", () => {
     cy.route({
       method: "GET",
       url: "https://conduit.productionready.io/api/articles",
@@ -18,5 +18,7 @@ describe("User can see articles on Homepage", () => {
       "contain.text",
       "How to train your dragon"
     );
+    cy.get("[data-cy=article-title]").first().click()
+    cy.url().should("contain","/how-to-train-your-dragon")
   });
 });

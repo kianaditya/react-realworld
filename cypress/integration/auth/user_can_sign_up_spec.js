@@ -18,5 +18,7 @@ describe("User can sign up", () => {
     });
     cy.get("[data-cy=registerButton]").click();
     // cy.url().should("not.contain", "/signup");
+    cy.get("[data-cy=loginLink]").should("not.exist")
+
   });
 });

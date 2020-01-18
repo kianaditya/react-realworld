@@ -20,12 +20,13 @@ const LoginForm = props => {
           }
         }
       );
-      setState(state => ({ ...state, isSignedIn: true }));
+      const currentUser = {
+        isSignedIn:true,
+        username: response.data.user.username
+      }
+      setState(state => ({ ...state, currentUser: currentUser} ));
       props.history.push({
-        pathname: "/",
-        state: {
-          signedIn: true
-        }
+        pathname: "/"
       });
     } catch (error) {
       console.error(error);

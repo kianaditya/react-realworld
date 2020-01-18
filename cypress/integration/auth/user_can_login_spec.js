@@ -17,5 +17,7 @@ describe("User can login", () => {
     });
     cy.get("[data-cy=loginButton]").click();
     // cy.url().should("not.contain", "/login");
+    cy.get("[data-cy=loginLink]").should("not.exist")
+
   });
 });

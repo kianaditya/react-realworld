@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import Banner from "./Banner";
+import { AppContext } from "../AppContext";
 const axios = require("axios");
 
 const ArticleList = () => {
-  const [articles, setArticles] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [state, setState] = useContext(AppContext);
   const fetchArticles = async () => {
     const response = await axios.get(
       "https://conduit.productionready.io/api/articles"
     );
-    setArticles(response.data.articles);
+    // setArticles(response.data.articles);
+    setState(state => ({ ...state, articles: response.data.articles }));
   };
   const fetchTags = async () => {
     const response = await axios.get(
       "https://conduit.productionready.io/api/tags"
     );
-    setTags(response.data.tags);
+    // setTags(response.data.tags);
+    setState(state => ({ ...state, tags: response.data.tags }));
   };
   useEffect(() => {
     fetchArticles();
     fetchTags();
   }, []);
-  const renderArticles = articles.map((article, index) => {
+  const renderArticles = state.articles.map((article, index) => {
     return (
       <div key={index} className="article-preview">
         <div className="article-meta">
@@ -38,15 +41,24 @@ const ArticleList = () => {
             <i className="ion-heart"></i> {article.favoritesCount}
           </button>
         </div>
-        <a href="" className="preview-link">
-          <h1>{article.title}</h1>
+        {/* <a href="" className="preview-link">
+          <h1 data-cy="article-title">{article.title}</h1>
           <p>{article.description}</p>
           <span>Read more...</span>
-        </a>
+        </a> */}
+        <Link
+          data-cy="signUpLink"
+          className="nav-link active"
+          to={`/article/${article.slug}`}
+        >
+          <h1 data-cy="article-title">{article.title}</h1>
+          <p>{article.description}</p>
+          <span>Read more...</span>
+        </Link>
       </div>
     );
   });
-  const renderTags = tags.map((tag, index) => {
+  const renderTags = state.tags.map((tag, index) => {
     return (
       <span key={index}>
         <a href="" className="tag-pill tag-default">
@@ -64,11 +76,11 @@ const ArticleList = () => {
             <div className="col-md-9">
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
-                  <li className="nav-item">
+                  {state.currentUser.isSignedIn && <li className="nav-item">
                     <a className="nav-link disabled" href="">
                       Your Feed
                     </a>
-                  </li>
+                  </li>}
                   <li className="nav-item">
                     <a className="nav-link active" href="">
                       Global Feed
@@ -81,7 +93,9 @@ const ArticleList = () => {
             <div className="col-md-3">
               <div className="sidebar">
                 <p>Popular Tags</p>
-                <div data-cy="tagList" className="tag-list">{renderTags}</div>
+                <div data-cy="tagList" className="tag-list">
+                  {renderTags}
+                </div>
               </div>
             </div>
           </div>

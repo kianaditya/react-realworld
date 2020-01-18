@@ -4,7 +4,9 @@ const AppContext = React.createContext([{}, () => {}]);
 
 const AppContextProvider = props => {
   const initialState = {
-    isSignedIn: false
+    currentUser: { isSignedIn: false, username: "" },
+    articles: [],
+    tags: []
   };
   const [state, setState] = useState(initialState);
   return (
