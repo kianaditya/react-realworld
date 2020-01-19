@@ -14,15 +14,16 @@ describe("Logged in User can see own articles on Homepage", () => {
       response: "fixture:tags.json"
     });
     cy.route({
-      method:"GET",
-      url:"https://conduit.productionready.io/api/articles/feed?limit=10&offset=0",
+      method: "GET",
+      url:
+        "https://conduit.productionready.io/api/articles/feed?limit=10&offset=0",
       status: 200,
       response: "fixture:own_article_list.json"
-    })
-    cy.loggedInAs('user121212@mail.com')
-    cy.get("[data-cy=allArticles]").should(
-      "contain.text",
-      "How to train your dragon"
+    });
+    cy.loggedInAs("user121212@mail.com");
+    cy.get("[data-cy=myArticles]").should(
+      "contain.value",
+      "Global Feed"
     );
   });
 });
