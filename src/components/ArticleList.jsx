@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Banner from "./Banner";
 import { AppContext } from "../AppContext";
@@ -6,6 +6,10 @@ const axios = require("axios");
 
 const ArticleList = () => {
   const [state, setState] = useContext(AppContext);
+  const [activeTab, setactiveTab] = useState("globalFeed");
+  useEffect(()=>{
+    state.currentUser.isSignedIn && setactiveTab("myFeed")
+  },[])
   const fetchArticles = async () => {
     const response = await axios.get(
       "https://conduit.productionready.io/api/articles"
@@ -69,20 +73,22 @@ const ArticleList = () => {
   });
   return (
     <>
-      <div className="home-page" data-cy="allArticles">
+      <div className="home-page" data-cy={state.currentUser.isSignedIn ? "my-articles":"allArticles"}>
         <Banner />
         <div className="container page">
           <div className="row">
             <div className="col-md-9">
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
-                  {state.currentUser.isSignedIn && <li className="nav-item">
-                    <a className="nav-link disabled" href="">
-                      Your Feed
-                    </a>
-                  </li>}
+                  {state.currentUser.isSignedIn && (
+                    <li className="nav-item">
+                      <a className={activeTab === 'myFeed' ? "active nav-link" : "nav-link disabled"} href="" onClick={() =>setactiveTab("myFeed")}>
+                        Your Feed
+                      </a>
+                    </li>
+                  )}
                   <li className="nav-item">
-                    <a className="nav-link active" href="">
+                    <a className={activeTab === 'globalFeed' ? "active nav-link" : "nav-link disabled"} href="" onClick={() =>setactiveTab("globalFeed")}>
                       Global Feed
                     </a>
                   </li>
