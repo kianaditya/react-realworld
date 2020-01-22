@@ -73,7 +73,7 @@ const ArticleList = () => {
   });
   return (
     <>
-      <div className="home-page" data-cy="allArticles">
+      <div className="home-page" data-cy={state.currentUser.isSignedIn ? "my-articles":"allArticles"}>
         <Banner />
         <div className="container page">
           <div className="row">
