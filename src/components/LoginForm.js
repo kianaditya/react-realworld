@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { AppContext } from "../AppContext";
-const axios = require("axios");
+import axios from "../helpers/axiosService";
+import {setToken}from "../helpers/localStorage"
 
 const LoginForm = props => {
   const [state, setState] = useContext(AppContext);
@@ -9,22 +10,14 @@ const LoginForm = props => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = { user: Object.fromEntries(formData) };
-
     try {
-      const response = await axios.post(
-        "https://conduit.productionready.io/api/users/login",
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
+      const response = await axios.login(payload);
+      setToken(response.data.user.token)
       const currentUser = {
-        isSignedIn:true,
+        isSignedIn: true,
         username: response.data.user.username
-      }
-      setState(state => ({ ...state, currentUser: currentUser} ));
+      };
+      setState(state => ({ ...state, currentUser: currentUser }));
       props.history.push({
         pathname: "/"
       });
