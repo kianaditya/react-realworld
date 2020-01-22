@@ -11,7 +11,7 @@ const ArticleList = () => {
     state.currentUser.isSignedIn && setactiveTab("myFeed");
   }, []);
   const fetchArticles = async () => {
-    const response = await axios.fetchArticles();
+    const response = await axios.getArticles();
     // setArticles(response.data.articles);
     setState(state => ({ ...state, articles: response.data.articles }));
   };
