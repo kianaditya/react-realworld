@@ -12,7 +12,7 @@ const secureHttp = axios.create(defaultConfig);
 
 secureHttp.interceptors.request.use(
   config => {
-    // config.headers = getToken();
+    config.headers.common['Authorization'] = `Token ${getToken()}`
     return config;
   },
 
