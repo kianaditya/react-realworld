@@ -1,0 +1,42 @@
+import React, { useEffect, useContext } from "react";
+import { Switch, Route } from "react-router-dom";
+import { AppContext } from "./AppContext";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ArticleList from "./components/ArticleList";
+import RegistrationForm from "./components/RegistrationForm";
+import LoginForm from "./components/LoginForm";
+import SpecificArticle from "./components/SpecificArticle";
+import axios from "./helpers/axiosService";
+import { getToken } from "./helpers/localStorage";
+
+const App = () => {
+  const [userstate, setUserstate] = useContext(AppContext);
+  useEffect(async() => {
+    const token = getToken();
+    if(token){
+      const response = await axios.getUser()
+      const currentUser = {
+        isSignedIn: true,
+        username: response.data.user.username
+      };
+      setUserstate(state => ({ ...state, currentUser: currentUser }));
+    }
+  }, []);
+
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route exact path="/" render={() => <ArticleList />} />
+        <Route path="/signup" render={() => <RegistrationForm />} />
+        <Route path="/login" render={() => <LoginForm />} />
+        <Route path="/article/:slug" render={() => <SpecificArticle />} />
+      </Switch>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
