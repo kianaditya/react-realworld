@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { AppContext } from "../AppContext";
 const axios = require("axios");
 
 const RegistrationForm = props => {
   const [state, setState] = useContext(AppContext);
+  const [formData, setFormData] = useState({});
+
+  const onInputChangeHandler = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const submitRegistration = async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -21,10 +26,10 @@ const RegistrationForm = props => {
         }
       );
       const currentUser = {
-        isSignedIn:true,
+        isSignedIn: true,
         username: response.data.user.username
-      }
-      setState(state => ({ ...state, currentUser: currentUser} ));
+      };
+      setState(state => ({ ...state, currentUser: currentUser }));
       props.history.push({
         pathname: "/"
       });
@@ -52,6 +57,8 @@ const RegistrationForm = props => {
                 placeholder="Your Name"
                 data-cy="userName"
                 name="username"
+                value={formData.username}
+                onChange={onInputChangeHandler}
               />
 
               <input
@@ -60,6 +67,8 @@ const RegistrationForm = props => {
                 placeholder="Email"
                 data-cy="email"
                 name="email"
+                value={formData.email}
+                onChange={onInputChangeHandler}
               />
               <input
                 className="form-control form-control-lg"
@@ -67,6 +76,8 @@ const RegistrationForm = props => {
                 placeholder="Password"
                 data-cy="password"
                 name="password"
+                value={formData.password}
+                onChange={onInputChangeHandler}
               />
               <button
                 className="btn btn-lg btn-primary pull-xs-right"
