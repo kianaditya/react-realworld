@@ -3,7 +3,7 @@ import { getToken } from "./localStorage";
 const axios = require("axios");
 
 const defaultConfig = {
-  baseURL: process.env.REACT_APP_API_URL
+  baseURL: "https://conduit.productionready.io/api/"
 };
 
 const http = axios.create(defaultConfig);
