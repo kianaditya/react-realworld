@@ -42,7 +42,7 @@ const LoginForm = props => {
               {/* <ul className="error-messages">
               <li>That email is already taken</li>
             </ul> */}
-              <form id="myForm" onSubmit={submitLogin}>
+              <form id="loginForm" onSubmit={submitLogin}>
                 <input
                   className="form-control form-control-lg"
                   type="text"
