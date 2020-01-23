@@ -1,0 +1,12 @@
+{
+  "user": {
+    "id": 81268,
+    "email": "user123@mail.com",
+    "createdAt": "2020-01-19T19:14:04.516Z",
+    "updatedAt": "2020-01-23T16:17:26.752Z",
+    "username": "user121212",
+    "bio": "test",
+    "image": "",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ODEyNjgsInVzZXJuYW1lIjoidXNlcjEyMTIxMiIsImV4cCI6MTU4NDk4MDI0Nn0.uSJZVmeFkVKVWbfTj6g9dfC_G5PUH1Tt_AsZECWu1VA"
+  }
+}

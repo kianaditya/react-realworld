@@ -18,11 +18,14 @@ const App = () => {
     const token = getToken();
     if(token){
       const response = await axios.getUser()
-      const currentUser = {
-        isSignedIn: true,
-        username: response.data.user.username
-      };
-      setUserstate(state => ({ ...state, currentUser: currentUser }));
+      // const currentUser = {
+      //   isSignedIn: true,
+      //   username: response.data.user.username,
+      //   image: response.data.user.image,
+      //   email: response.data.user.email,
+      //   bio: response.data.user
+      // };
+      setUserstate(state => ({ ...state, currentUser: {...response.data.user,isSignedIn:true} }));
     }
   }, []);
 

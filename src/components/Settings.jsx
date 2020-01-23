@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 
 import axios from "../helpers/axiosService";
@@ -6,9 +6,11 @@ import { AppContext } from "../AppContext";
 import { deleteToken } from "../helpers/localStorage";
 
 const Settings = props => {
-  const [formData, setFormData] = useState({});
   const [state, setState] = useContext(AppContext);
-
+  const [formData, setFormData] = useState({});
+  useEffect(() => {
+   setFormData(state.currentUser)
+  }, [state])
   const onInputChangeHandler = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -47,33 +49,49 @@ const Settings = props => {
                 class="form-control"
                 type="text"
                 placeholder="URL of profile picture"
+                name="image"
+                value={formData.image}
+                  onChange={onInputChangeHandler}
               />
               <input
                 class="form-control form-control-lg"
                 type="text"
                 placeholder="Your Name"
+                name="username"
+                value={formData.username}
+                  onChange={onInputChangeHandler}
               />
               <textarea
                 class="form-control form-control-lg"
                 rows="8"
                 placeholder="Short bio about you"
+                name="bio"
+                value={formData.bio}
+                  onChange={onInputChangeHandler}
               ></textarea>
               <input
                 class="form-control form-control-lg"
                 type="text"
                 placeholder="Email"
+                name="email"
+                value={formData.email}
+                  onChange={onInputChangeHandler}
               />
               <input
                 class="form-control form-control-lg"
                 type="password"
                 placeholder="Password"
+                name="password"
+                value={formData.password}
+                  onChange={onInputChangeHandler}
               />
               <button class="btn btn-lg btn-primary pull-xs-right">
                 Update Settings
               </button>
             </form>
+            <hr></hr>
             <p>
-              <button class="btn btn-lg btn-primary pull-xs-left" data-cy="logout" onClick={() => logoutUser()}>
+              <button class="btn btn-lg btn-outline-danger pull-xs-left" data-cy="logout" onClick={() => logoutUser()}>
                 Log out
               </button>
             </p>
