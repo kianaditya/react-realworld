@@ -10,6 +10,7 @@ import LoginForm from "./components/LoginForm";
 import SpecificArticle from "./components/SpecificArticle";
 import axios from "./helpers/axiosService";
 import { getToken } from "./helpers/localStorage";
+import Settings from "./components/Settings";
 
 const App = () => {
   const [userstate, setUserstate] = useContext(AppContext);
@@ -32,6 +33,7 @@ const App = () => {
         <Route exact path="/" render={() => <ArticleList />} />
         <Route path="/signup" render={() => <RegistrationForm />} />
         <Route path="/login" render={() => <LoginForm />} />
+        <Route path="/settings" render={() => <Settings/>} />
         <Route path="/article/:slug" render={() => <SpecificArticle />} />
       </Switch>
       <Footer />
