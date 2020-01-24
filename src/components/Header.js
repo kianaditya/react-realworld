@@ -13,7 +13,7 @@ const Header = () => {
           </Link>
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
-              <Link className="nav-link active" href="/">
+              <Link data-cy="home" className="nav-link active" to="/">
                 Home
               </Link>
             </li>
@@ -25,9 +25,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="">
+                  <Link data-cy="settings" className="nav-link" to="/settings">
                     <i className="ion-gear-a"></i>&nbsp;Settings
-                  </a>
+                  </Link>
                 </li>
               </>
             )}

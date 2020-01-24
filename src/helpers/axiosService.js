@@ -13,6 +13,7 @@ const secureHttp = axios.create(defaultConfig);
 secureHttp.interceptors.request.use(
   config => {
     config.headers.common["Authorization"] = `Token ${getToken()}`;
+    config.headers["Content-Type"] = "application/json"
     return config;
   },
 
@@ -61,8 +62,8 @@ export default {
   getUser() {
     return secureHttp.get("user");
   },
-  updateUser() {
-    return secureHttp.put("user");
+  updateUser(data) {
+    return secureHttp.put("user",data);
   },
   getProfile(username) {
     return http.get(`profiles/${username}`);
