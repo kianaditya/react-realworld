@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 
 import axios from "../helpers/axiosService";
@@ -9,8 +9,8 @@ const Settings = props => {
   const [state, setState] = useContext(AppContext);
   const [formData, setFormData] = useState({});
   useEffect(() => {
-   setFormData(state.currentUser)
-  }, [state])
+    setFormData(state.currentUser);
+  }, [state]);
   const onInputChangeHandler = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -33,7 +33,7 @@ const Settings = props => {
   };
   const logoutUser = () => {
     deleteToken();
-    setState(state => ({...state, currentUser: {isSignedIn: false}}))
+    setState(state => ({ ...state, currentUser: { isSignedIn: false } }));
     props.history.push({
       pathname: "/"
     });
@@ -51,7 +51,8 @@ const Settings = props => {
                 placeholder="URL of profile picture"
                 name="image"
                 value={formData.image}
-                  onChange={onInputChangeHandler}
+                onChange={onInputChangeHandler}
+                data-cy="image"
               />
               <input
                 class="form-control form-control-lg"
@@ -59,7 +60,8 @@ const Settings = props => {
                 placeholder="Your Name"
                 name="username"
                 value={formData.username}
-                  onChange={onInputChangeHandler}
+                onChange={onInputChangeHandler}
+                data-cy="username"
               />
               <textarea
                 class="form-control form-control-lg"
@@ -67,7 +69,8 @@ const Settings = props => {
                 placeholder="Short bio about you"
                 name="bio"
                 value={formData.bio}
-                  onChange={onInputChangeHandler}
+                onChange={onInputChangeHandler}
+                data-cy="bio"
               ></textarea>
               <input
                 class="form-control form-control-lg"
@@ -75,7 +78,8 @@ const Settings = props => {
                 placeholder="Email"
                 name="email"
                 value={formData.email}
-                  onChange={onInputChangeHandler}
+                onChange={onInputChangeHandler}
+                data-cy="email"
               />
               <input
                 class="form-control form-control-lg"
@@ -83,15 +87,20 @@ const Settings = props => {
                 placeholder="Password"
                 name="password"
                 value={formData.password}
-                  onChange={onInputChangeHandler}
+                onChange={onInputChangeHandler}
+                data-cy="password"
               />
-              <button class="btn btn-lg btn-primary pull-xs-right">
+              <button data-cy="updateProfile" class="btn btn-lg btn-primary pull-xs-right">
                 Update Settings
               </button>
             </form>
             <hr></hr>
             <p>
-              <button class="btn btn-lg btn-outline-danger pull-xs-left" data-cy="logout" onClick={() => logoutUser()}>
+              <button
+                class="btn btn-lg btn-outline-danger pull-xs-left"
+                data-cy="logout"
+                onClick={() => logoutUser()}
+              >
                 Log out
               </button>
             </p>

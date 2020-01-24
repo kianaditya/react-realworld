@@ -25,11 +25,6 @@ describe("Logged in User can see own articles on Homepage", () => {
       status: 200,
       response: "fixture:own_article_list.json"
     });
-    cy.route({
-      method: "POST",
-      url: "https://conduit.productionready.io/api/users/login",
-      response: "fixture:successful_login.json"
-    });
     cy.visit("/");
     cy.get("[data-cy=loginLink]").click();
     cy.url().should("contain", "/login");

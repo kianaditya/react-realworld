@@ -13,19 +13,15 @@ import { getToken } from "./helpers/localStorage";
 import Settings from "./components/Settings";
 
 const App = () => {
-  const [userstate, setUserstate] = useContext(AppContext);
-  useEffect(async() => {
+  const [state, setState] = useContext(AppContext);
+  useEffect(async () => {
     const token = getToken();
-    if(token){
-      const response = await axios.getUser()
-      // const currentUser = {
-      //   isSignedIn: true,
-      //   username: response.data.user.username,
-      //   image: response.data.user.image,
-      //   email: response.data.user.email,
-      //   bio: response.data.user
-      // };
-      setUserstate(state => ({ ...state, currentUser: {...response.data.user,isSignedIn:true} }));
+    if (token) {
+      const response = await axios.getUser();
+      setState(state => ({
+        ...state,
+        currentUser: { isSignedIn: true, ...response.data.user }
+      }));
     }
   }, []);
 
@@ -36,7 +32,7 @@ const App = () => {
         <Route exact path="/" render={() => <ArticleList />} />
         <Route path="/signup" render={() => <RegistrationForm />} />
         <Route path="/login" render={() => <LoginForm />} />
-        <Route path="/settings" render={() => <Settings/>} />
+        <Route path="/settings" render={() => <Settings />} />
         <Route path="/article/:slug" render={() => <SpecificArticle />} />
       </Switch>
       <Footer />
