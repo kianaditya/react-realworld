@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import ArticleList from "./components/ArticleList";
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm.jsx";
-import SpecificArticle from "./components/SpecificArticle";
+import SpecificArticle from "./components/SpecificArticle.jsx";
 import axios from "./helpers/axiosService";
 import { getToken } from "./helpers/localStorage";
 import Settings from "./components/Settings";

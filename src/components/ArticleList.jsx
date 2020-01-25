@@ -77,6 +77,7 @@ const ArticleList = () => {
                             : "nav-link disabled"
                         }
                         onClick={() => setActiveTab("myFeed")}
+                        data-cy="myFeed"
                       >
                         Your Feed
                       </a>
@@ -90,6 +91,7 @@ const ArticleList = () => {
                           : "nav-link disabled"
                       }
                       onClick={() => setActiveTab("globalFeed")}
+                      data-cy="globalFeed"
                     >
                       Global Feed
                     </a>
