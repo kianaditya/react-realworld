@@ -14,7 +14,7 @@ import Settings from "./components/Settings";
 
 const App = () => {
   const [state, setState] = useContext(AppContext);
-  useEffect(async () => {
+  const checkUser = async () => {
     const token = getToken();
     if (token) {
       const response = await axios.getUser();
@@ -23,7 +23,10 @@ const App = () => {
         currentUser: { isSignedIn: true, ...response.data.user }
       }));
     }
-  }, []);
+  }
+  useEffect(()=>{
+    checkUser()
+  },[state.currentUser.isSignedIn])
 
   return (
     <div className="App">

@@ -5,26 +5,15 @@ import { AppContext } from "../AppContext";
 import axios from "../helpers/axiosService";
 
 const ArticleList = () => {
-  const [state, setState] = useContext(AppContext);
-  const [activeTab, setactiveTab] = useState("globalFeed");
-  useEffect(() => {
-    state.currentUser.isSignedIn && setactiveTab("myFeed");
-  }, []);
-  const fetchArticles = async () => {
-    const response = await axios.getArticles();
-    // setArticles(response.data.articles);
-    setState(state => ({ ...state, articles: response.data.articles }));
-  };
-  const fetchTags = async () => {
-    const response = await axios.fetchTags();
-    // setTags(response.data.tags);
-    setState(state => ({ ...state, tags: response.data.tags }));
-  };
-  useEffect(() => {
-    fetchArticles();
-    fetchTags();
-  }, []);
-  const renderArticles = state.articles.map((article, index) => {
+  const [
+    articles,
+    tags,
+    userIsSignedIn,
+    activeTab,
+    setActiveTab
+  ] = useArticleList();
+
+  const renderArticles = articles.map((article, index) => {
     return (
       <div key={index} className="article-preview">
         <div className="article-meta">
@@ -58,7 +47,7 @@ const ArticleList = () => {
       </div>
     );
   });
-  const renderTags = state.tags.map((tag, index) => {
+  const renderTags = tags.map((tag, index) => {
     return (
       <span key={index}>
         <a href="" className="tag-pill tag-default">
@@ -71,7 +60,7 @@ const ArticleList = () => {
     <>
       <div
         className="home-page"
-        data-cy={state.currentUser.isSignedIn ? "my-articles" : "allArticles"}
+        data-cy={userIsSignedIn ? "my-articles" : "allArticles"}
       >
         <Banner />
         <div className="container page">
@@ -79,21 +68,20 @@ const ArticleList = () => {
             <div className="col-md-9">
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
-                  {state.currentUser.isSignedIn && (
-                    <li className="nav-item">
+                  <li className="nav-item">
+                    {userIsSignedIn && (
                       <a
                         className={
                           activeTab === "myFeed"
                             ? "active nav-link"
                             : "nav-link disabled"
                         }
-                        href=""
-                        onClick={() => setactiveTab("myFeed")}
+                        onClick={() => setActiveTab("myFeed")}
                       >
                         Your Feed
                       </a>
-                    </li>
-                  )}
+                    )}
+                  </li>
                   <li className="nav-item">
                     <a
                       className={
@@ -101,15 +89,14 @@ const ArticleList = () => {
                           ? "active nav-link"
                           : "nav-link disabled"
                       }
-                      href=""
-                      onClick={() => setactiveTab("globalFeed")}
+                      onClick={() => setActiveTab("globalFeed")}
                     >
                       Global Feed
                     </a>
                   </li>
                 </ul>
               </div>
-              {renderArticles}
+              {articles.length > 0 ? renderArticles : "Nothing here yet! "}
             </div>
             <div className="col-md-3">
               <div className="sidebar">
@@ -127,3 +114,51 @@ const ArticleList = () => {
 };
 
 export default ArticleList;
+
+const useArticleList = () => {
+  const [state, setState] = useContext(AppContext);
+  const [activeTab, setActiveTab] = useState("globalFeed");
+  const [articles, setArticles] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
+  const [feedArticles, setFeedArticles] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [userIsSignedIn, setUserIsSignedIn] = useState();
+  const fetchArticles = async () => {
+    const response = await axios.getArticles();
+    setAllArticles(response.data.articles);
+  };
+  const fetchFeedArticles = async () => {
+    const response = await axios.getFeedArticles();
+    setFeedArticles(response.data.articles);
+  };
+  const fetchTags = async () => {
+    const response = await axios.fetchTags();
+    setTags(response.data.tags);
+  };
+  const setDisplayArticles = () => {
+    if (activeTab === "myFeed") {
+      setArticles(feedArticles);
+    } else {
+      setArticles(allArticles);
+    }
+  };
+  useEffect(() => {
+    state.currentUser.isSignedIn && setActiveTab("myFeed");
+    setUserIsSignedIn(state.currentUser.isSignedIn);
+  }, [state.currentUser]);
+
+  useEffect(() => {
+    fetchArticles();
+    fetchTags();
+  }, []);
+
+  useEffect(() => {
+    state.currentUser.isSignedIn && fetchFeedArticles();
+  }, [state.currentUser]);
+
+  useEffect(() => {
+    setDisplayArticles();
+  }, [allArticles, feedArticles, activeTab]);
+
+  return [articles, tags, userIsSignedIn, activeTab, setActiveTab];
+};

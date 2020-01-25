@@ -99,7 +99,7 @@ export default {
     return secureHttp.delete(`articles/${slug}/favorite`);
   },
   fetchTags() {
-    return secureHttp.get("tags");
+    return http.get("tags");
   },
   addComments(slug, data) {
     return secureHttp.post(`articles/${slug}/comments`, data);
