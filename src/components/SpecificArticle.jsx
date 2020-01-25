@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import moment from 'moment'
-const axios = require("axios");
+import moment from "moment";
+import axios from "../helpers/axiosService";
 
 const SpecificArticle = props => {
-  const [article, setArticle] = useState();
-  const [comments, setComments] = useState()
-  const slug = props.history.location.pathname.split("/")[2];
-  const fetchSpecificArticle = async () => {
-    const response = await axios.get(
-      `https://conduit.productionready.io/api/articles/${slug}`
-    );
-    setArticle(response.data.article);
-  };
-  const fetchComments = async () => {
-    const response = await axios.get(
-      `https://conduit.productionready.io/api/articles/${slug}/comments`
-    );
-    setComments(response.data.comments);
-  }
-  // debugger;
-  useEffect(() => {
-    fetchSpecificArticle();
-    fetchComments();
-  }, []);
+  const [article, comments, followStatus, toggleFollow, favorite, toggleFavorite, favoriteCount] = useSpecificArticle(
+    props
+  );
+
   return (
     <div>
       {article && (
@@ -40,17 +24,22 @@ const SpecificArticle = props => {
                   <a href="" class="author">
                     {article.author.username}
                   </a>
-                  <span class="date">{moment(article.updatedAt).format("Do MMM Y")}</span>
+                  <span class="date">
+                    {moment(article.updatedAt).format("Do MMM Y")}
+                  </span>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary">
-                  <i class="ion-plus-round"></i>
-                  &nbsp; Follow {article.author.username}{" "}
-                  <span class="counter">(10)</span>
+                <button
+                  onClick={() => toggleFollow()}
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                 <i class="ion-plus-round"></i>
+                  &nbsp; {followStatus ? "Following" : "Follow"} {article.author.username}{" "}
+                  {/* <span class="counter">(10)</span> */}
                 </button>
                 &nbsp;&nbsp;
-                <button class="btn btn-sm btn-outline-primary">
+                <button onClick={()=>toggleFavorite()} class="btn btn-sm btn-outline-primary" data-cy="fav-button">
                   <i class="ion-heart"></i>
-                  &nbsp; Favorite Post <span class="counter">(29)</span>
+      &nbsp; {favorite ?  "Post favorited":"Favorite Post"} <span class="counter">({favoriteCount})</span>
                 </button>
               </div>
             </div>
@@ -59,9 +48,7 @@ const SpecificArticle = props => {
           <div class="container page">
             <div class="row article-content">
               <div class="col-md-12">
-                <p>
-                  {article.body}
-                </p>
+                <p>{article.body}</p>
                 {/* <h2 id="introducing-ionic">Introducing RealWorld.</h2>
                 <p>
                   It's a great solution for learning how other frameworks work.
@@ -80,7 +67,9 @@ const SpecificArticle = props => {
                   <a href="" class="author">
                     {article.author.username}
                   </a>
-                  <span class="date">{moment(article.updatedAt).format("Do MMM Y")}</span>
+                  <span class="date">
+                    {moment(article.updatedAt).format("Do MMM Y")}
+                  </span>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary">
                   <i class="ion-plus-round"></i>
@@ -88,9 +77,9 @@ const SpecificArticle = props => {
                   <span class="counter">(10)</span>
                 </button>
                 &nbsp;
-                <button class="btn btn-sm btn-outline-primary">
+                <button class="btn btn-sm btn-outline-primary" >
                   <i class="ion-heart"></i>
-                  &nbsp; Favorite Post <span class="counter">(29)</span>
+              &nbsp; Favorite Post <span class="counter">({favoriteCount})</span>
                 </button>
               </div>
             </div>
@@ -171,3 +160,44 @@ const SpecificArticle = props => {
 };
 
 export default withRouter(SpecificArticle);
+
+const useSpecificArticle = props => {
+  const [article, setArticle] = useState();
+  const [comments, setComments] = useState();
+  const [followStatus, setFollowStatus] = useState();
+  const [favorite,setFavorite] = useState()
+  const [favoriteCount, setFavoriteCount] = useState(0)
+  const slug = props.history.location.pathname.split("/")[2];
+  const fetchSpecificArticle = async () => {
+    const response = await axios.getSpecificArticle(slug);
+    setArticle(response.data.article);
+    setFollowStatus(response.data.article.author.following);
+  };
+  const fetchComments = async () => {
+    const response = await axios.getComments(slug);
+    setComments(response.data.comments);
+  };
+  const toggleFollow = async () => {
+    if (followStatus) {
+      const response = await axios.unfollowUser(article.author.username);
+    } else {
+      const response = await axios.followUser(article.author.username);
+    }
+    setFollowStatus(!followStatus);
+  };
+  const toggleFavorite = async () => {
+    if (!favorite) {
+      const response = await axios.favoriteArticle(article.slug);
+      setFavoriteCount(response.data.article.favoritesCount)
+    } else {
+      const response = await axios.unfavoriteArticle(article.slug);
+      setFavoriteCount(response.data.article.favoritesCount)
+    }
+    setFavorite(!favorite);
+  };
+  useEffect(() => {
+    fetchSpecificArticle();
+    fetchComments();
+  }, []);
+  return [article, comments, followStatus, toggleFollow, favorite, toggleFavorite, favoriteCount];
+};
