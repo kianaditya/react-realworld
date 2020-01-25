@@ -21,7 +21,7 @@ describe("Logged in User can see own articles on Homepage", () => {
     cy.route({
       method: "GET",
       url:
-        "https://conduit.productionready.io/api/articles/feed?limit=10&offset=0",
+        "https://conduit.productionready.io/api/articles/feed",
       status: 200,
       response: "fixture:own_article_list.json"
     });
