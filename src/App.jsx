@@ -11,6 +11,7 @@ import SpecificArticle from "./components/SpecificArticle.jsx";
 import axios from "./helpers/axiosService";
 import { getToken } from "./helpers/localStorage";
 import Settings from "./components/Settings";
+import ArticleManagementForm from "./components/ArticleManagementForm";
 
 const App = () => {
   const [state, setState] = useContext(AppContext);
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/login" render={() => <LoginForm />} />
         <Route path="/settings" render={() => <Settings />} />
         <Route path="/article/:slug" render={() => <SpecificArticle />} />
+        <Route path="/create" render={() => <ArticleManagementForm/>} />
       </Switch>
       <Footer />
     </div>

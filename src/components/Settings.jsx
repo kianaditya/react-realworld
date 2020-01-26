@@ -39,14 +39,14 @@ const Settings = props => {
     });
   };
   return (
-    <div class="settings-page">
-      <div class="container page">
-        <div class="row">
-          <div class="col-md-6 offset-md-3 col-xs-12">
-            <h1 class="text-xs-center">Your Settings</h1>
+    <div className="settings-page">
+      <div className="container page">
+        <div className="row">
+          <div className="col-md-6 offset-md-3 col-xs-12">
+            <h1 className="text-xs-center">Your Settings</h1>
             <form onSubmit={updateUser}>
               <input
-                class="form-control"
+                className="form-control"
                 type="text"
                 placeholder="URL of profile picture"
                 name="image"
@@ -55,7 +55,7 @@ const Settings = props => {
                 data-cy="image"
               />
               <input
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 type="text"
                 placeholder="Your Name"
                 name="username"
@@ -64,7 +64,7 @@ const Settings = props => {
                 data-cy="username"
               />
               <textarea
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 rows="8"
                 placeholder="Short bio about you"
                 name="bio"
@@ -73,7 +73,7 @@ const Settings = props => {
                 data-cy="bio"
               ></textarea>
               <input
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 type="text"
                 placeholder="Email"
                 name="email"
@@ -82,7 +82,7 @@ const Settings = props => {
                 data-cy="email"
               />
               <input
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 type="password"
                 placeholder="Password"
                 name="password"
@@ -90,14 +90,14 @@ const Settings = props => {
                 onChange={onInputChangeHandler}
                 data-cy="password"
               />
-              <button data-cy="updateProfile" class="btn btn-lg btn-primary pull-xs-right">
+              <button data-cy="updateProfile" className="btn btn-lg btn-primary pull-xs-right">
                 Update Settings
               </button>
             </form>
             <hr></hr>
             <p>
               <button
-                class="btn btn-lg btn-outline-danger pull-xs-left"
+                className="btn btn-lg btn-outline-danger pull-xs-left"
                 data-cy="logout"
                 onClick={() => logoutUser()}
               >

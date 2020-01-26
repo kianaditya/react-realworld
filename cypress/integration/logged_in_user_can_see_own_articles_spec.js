@@ -34,7 +34,7 @@ describe("Logged in User can see own articles on Homepage", () => {
     ].forEach(element => {
       cy.get(`[data-cy=${element.field}]`).type(element.text);
     });
-    cy.get("[data-cy=loginButton]").click();
+    cy.get("[data-cy=login-button]").click();
     cy.get("[data-cy=my-articles]").should(
       "contain.text",
       "How to train your dragon"

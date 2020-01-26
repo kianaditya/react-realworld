@@ -20,9 +20,9 @@ const Header = () => {
             {state.currentUser.isSignedIn && (
               <>
                 <li className="nav-item">
-                  <a className="nav-link" href="">
+                  <Link className="nav-link" data-cy='create-article-link' to="/create">
                     <i className="ion-compose"></i>&nbsp;New Post
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link data-cy="settings" className="nav-link" to="/settings">
