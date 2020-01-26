@@ -11,7 +11,7 @@
       "favorited": false,
       "favoritesCount": 0,
       "author": {
-        "username": "jake",
+        "username": "teacher@mail.com",
         "bio": "I work at statefarm",
         "image": "https://i.stack.imgur.com/xHWG8.jpg",
         "following": false
@@ -28,7 +28,7 @@
       "favorited": false,
       "favoritesCount": 0,
       "author": {
-        "username": "jake",
+        "username": "teacher@mail.com",
         "bio": "I work at statefarm",
         "image": "https://i.stack.imgur.com/xHWG8.jpg",
         "following": false

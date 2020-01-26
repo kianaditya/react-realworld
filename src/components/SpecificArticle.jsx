@@ -13,7 +13,8 @@ const SpecificArticle = props => {
     toggleFollow,
     favorite,
     toggleFavorite,
-    favoriteCount
+    favoriteCount,
+    deleteArticle
   ] = useSpecificArticle(props);
 
   return (
@@ -42,7 +43,7 @@ const SpecificArticle = props => {
                       Edit Article
                     </button>
 
-                    <button className="btn btn-sm btn-outline-danger">
+                    <button className="btn btn-sm btn-outline-danger" data-cy="delete-article" onClick={deleteArticle}>
                       Delete Article
                     </button>
                   </>
@@ -200,6 +201,16 @@ const useSpecificArticle = props => {
     }
     setFavorite(!favorite);
   };
+  const deleteArticle = async () => {
+    try {
+      const response = await axios.deleteArticle(article.slug)
+      props.history.push({
+        pathname: "/"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  }
   useEffect(() => {
     fetchSpecificArticle();
     fetchComments();
@@ -212,6 +223,7 @@ const useSpecificArticle = props => {
     toggleFollow,
     favorite,
     toggleFavorite,
-    favoriteCount
+    favoriteCount,
+    deleteArticle
   ];
 };
