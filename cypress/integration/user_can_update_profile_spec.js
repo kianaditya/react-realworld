@@ -23,7 +23,7 @@ describe('User can update profile', () => {
     ].forEach(element => {
       cy.get(`[data-cy=${element.field}]`).type(element.text);
     });
-    cy.get("[data-cy=loginButton]").click();
+    cy.get("[data-cy=login-button]").click();
     cy.get("[data-cy=settings]").click();
     cy.url().should("contain", "/settings");
     [

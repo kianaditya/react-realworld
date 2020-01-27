@@ -15,7 +15,7 @@ describe("User can login", () => {
     ].forEach(element => {
       cy.get(`[data-cy=${element.field}]`).type(element.text);
     });
-    cy.get("[data-cy=loginButton]").click();
+    cy.get("[data-cy=login-button]").click();
     cy.url().should("not.contain", "/login");
     cy.get("[data-cy=loginLink]").should("not.exist");
   });

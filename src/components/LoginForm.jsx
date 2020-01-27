@@ -63,7 +63,7 @@ const LoginForm = props => {
                 />
                 <button
                   className="btn btn-lg btn-primary pull-xs-right"
-                  data-cy="loginButton"
+                  data-cy="login-button"
                 >
                   Sign in
                 </button>

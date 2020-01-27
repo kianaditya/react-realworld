@@ -10,14 +10,14 @@
     "favorited": false,
     "favoritesCount": 0,
     "author": {
-      "username": "jake",
+      "username": "teacher@mail.com",
       "bio": "I work at statefarm",
       "image": "https://i.stack.imgur.com/xHWG8.jpg",
       "following": false
     }
   }, {
     "slug": "how-to-train-your-dragon-2",
-    "title": "How to train your dragon 2",
+    "title": "How to your dragon 2",
     "description": "So toothless",
     "body": "It a dragon",
     "tagList": ["dragons", "training"],
@@ -26,7 +26,7 @@
     "favorited": false,
     "favoritesCount": 0,
     "author": {
-      "username": "jake",
+      "username": "teacher@mail.com",
       "bio": "I work at statefarm",
       "image": "https://i.stack.imgur.com/xHWG8.jpg",
       "following": false

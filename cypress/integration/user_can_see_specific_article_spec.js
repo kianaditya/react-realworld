@@ -47,7 +47,7 @@ describe("User can specific article", () => {
     ].forEach(element => {
       cy.get(`[data-cy=${element.field}]`).type(element.text);
     });
-    cy.get("[data-cy=loginButton]").click();
+    cy.get("[data-cy=login-button]").click();
     cy.contains("Nothing here yet!")
     cy.get("[data-cy=globalFeed]").click()
     cy.get("[data-cy=my-articles]").should(
