@@ -38,7 +38,8 @@ const App = () => {
         <Route path="/login" render={() => <LoginForm />} />
         <Route path="/settings" render={() => <Settings />} />
         <Route path="/article/:slug" render={() => <SpecificArticle />} />
-        <Route path="/create" render={() => <ArticleManagementForm/>} />
+        <Route path="/:action" render={() => <ArticleManagementForm/>} />
+        <Route path="/:action/:slug" render={() => <ArticleManagementForm/>} />
       </Switch>
       <Footer />
     </div>

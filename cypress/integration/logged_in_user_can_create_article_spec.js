@@ -26,8 +26,8 @@ describe("User can create article", () => {
     cy.url().should("contain", "/create");
     [
       { field: "article-title", text: "How to train your dragon" },
-      { field: "article-slug", text: "how-to-train-your-dragon" },
-      { field: "article-description", text: "Ever wonder how?" },
+      { field: "article-description", text: "how-to-train-your-dragon" },
+      { field: "article-body", text: "Ever wonder how?" },
       { field: "article-tags", text: "dragons,training" }
     ].forEach(element => {
       cy.get(`[data-cy=${element.field}]`).type(element.text);

@@ -39,11 +39,21 @@ const SpecificArticle = props => {
                 </div>
                 {article.author.username === currentUser.username ? (
                   <>
-                    <button className="btn btn-sm btn-outline-secondary">
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={()=> props.history.push({
+                        pathname: `/update/${article.slug}`,
+                        state: {article}
+                      })}
+                    >
                       Edit Article
                     </button>
 
-                    <button className="btn btn-sm btn-outline-danger" data-cy="delete-article" onClick={deleteArticle}>
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      data-cy="delete-article"
+                      onClick={deleteArticle}
+                    >
                       Delete Article
                     </button>
                   </>
@@ -203,14 +213,14 @@ const useSpecificArticle = props => {
   };
   const deleteArticle = async () => {
     try {
-      const response = await axios.deleteArticle(article.slug)
+      const response = await axios.deleteArticle(article.slug);
       props.history.push({
         pathname: "/"
       });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
   useEffect(() => {
     fetchSpecificArticle();
     fetchComments();
