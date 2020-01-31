@@ -1,4 +1,5 @@
 # RealWorld - A Medium Clone
+![](https://github.com/kianaditya/react-realworld/workflows/End-to-end%20tests/badge.svg)
 
 ## Hosted [here](https://react-conduit-demo.netlify.com/)
 
