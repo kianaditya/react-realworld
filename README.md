@@ -1,7 +1,5 @@
 # RealWorld - A Medium Clone
-![](https://github.com/kianaditya/react-realworld/workflows/github%20CI/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/kianaditya/react-realworld/badge.svg?branch=cypress_refactor)](https://coveralls.io/github/kianaditya/react-realworld)
-
+![](https://github.com/kianaditya/react-realworld/workflows/github%20CI/badge.svg)[![Coverage Status](https://coveralls.io/repos/github/kianaditya/react-realworld/badge.svg?branch=development)](https://coveralls.io/github/kianaditya/react-realworld?branch=development)
 ## Hosted [here](https://react-conduit-demo.netlify.com/)
 
 This repository is based on [this project](https://github.com/gothinkster/realworld).
@@ -11,6 +9,9 @@ This repository is based on [this project](https://github.com/gothinkster/realwo
   - `useState`
   - `useEffect`
   - `useContext`
+- E2E testing with cypress
+- CI with github actions
+- Code coverage with [Coveralls](coveralls.io)
 
 ## API Path
 
