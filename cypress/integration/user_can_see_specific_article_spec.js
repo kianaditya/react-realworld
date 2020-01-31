@@ -30,7 +30,12 @@ describe("User can specific article", () => {
         "https://conduit.productionready.io/api/articles/how-to-train-your-dragon/favorite",
       response: "fixture:successful_favorite.json"
     });
-
+    cy.route({
+      method: "GET",
+      url: "https://conduit.productionready.io/api/articles/feed",
+      status: 200,
+      response: "fixture:own_article_list.json"
+    });
     cy.route({
       method: "GET",
       url: "https://conduit.productionready.io/api/articles",
@@ -38,7 +43,8 @@ describe("User can specific article", () => {
       response: "fixture:article_list.json"
     });
     cy.visit("/");
-    cy.loggedInAs("test@mail.com");
+    // cy.loggedInAs("test@mail.com");
+    cy.login();
     cy.contains("Nothing here yet!");
     cy.get("[data-cy=globalFeed]").click();
     cy.get("[data-cy=my-articles]").should(

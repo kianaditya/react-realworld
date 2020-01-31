@@ -20,4 +20,10 @@ import './commands'
 // require('./commands')
 beforeEach(()=>{
   cy.server()
+  cy.route({
+    method: "GET",
+    status: 200,
+    url: "https://conduit.productionready.io/api/user",
+    response: "fixture:successful_login.json"
+  });
 })

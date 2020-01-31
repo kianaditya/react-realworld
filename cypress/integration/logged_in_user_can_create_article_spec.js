@@ -9,7 +9,7 @@ describe("User can create article", () => {
     cy.visit("/");
     cy.get("[data-cy=create-article-link]").should("not.exist");
 
-    cy.loggedInAs("test@mail.com");
+    cy.login();
     cy.get("[data-cy=create-article-link]").click();
     cy.url().should("contain", "/create");
     [

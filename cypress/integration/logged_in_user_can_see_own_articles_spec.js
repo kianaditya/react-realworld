@@ -19,8 +19,8 @@ describe("Logged in User can see own articles on Homepage", () => {
       status: 200,
       response: "fixture:own_article_list.json"
     });
-    cy.visit("/");
-    cy.loggedInAs("test@mail.com");
+    
+    cy.login();
     cy.get("[data-cy=my-articles]").should(
       "contain.text",
       "How to train your dragon"
