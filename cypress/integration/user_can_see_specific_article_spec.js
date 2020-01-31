@@ -18,20 +18,19 @@ describe("User can specific article", () => {
       "contain.text",
       "How to train your dragon"
     );
-    cy.get("[data-cy=article-title]").first().click()
-    cy.url().should("contain","/how-to-train-your-dragon")
+    cy.get("[data-cy=article-title]")
+      .first()
+      .click();
+    cy.url().should("contain", "/how-to-train-your-dragon");
   });
-  it("Logged in User can favorite article",() => {
+  it("Logged in User can favorite article", () => {
     cy.route({
       method: "POST",
-      url: "https://conduit.productionready.io/api/articles/how-to-train-your-dragon/favorite",
+      url:
+        "https://conduit.productionready.io/api/articles/how-to-train-your-dragon/favorite",
       response: "fixture:successful_favorite.json"
     });
-    cy.route({
-      method: "POST",
-      url: "https://conduit.productionready.io/api/users/login",
-      response: "fixture:successful_login.json"
-    });
+
     cy.route({
       method: "GET",
       url: "https://conduit.productionready.io/api/articles",
@@ -39,25 +38,20 @@ describe("User can specific article", () => {
       response: "fixture:article_list.json"
     });
     cy.visit("/");
-    cy.get("[data-cy=loginLink]").click();
-    cy.url().should("contain", "/login");
-    [
-      { field: "email", text: "test@mail.com" },
-      { field: "password", text: "password" }
-    ].forEach(element => {
-      cy.get(`[data-cy=${element.field}]`).type(element.text);
-    });
-    cy.get("[data-cy=login-button]").click();
-    cy.contains("Nothing here yet!")
-    cy.get("[data-cy=globalFeed]").click()
+    cy.loggedInAs("test@mail.com");
+    cy.contains("Nothing here yet!");
+    cy.get("[data-cy=globalFeed]").click();
     cy.get("[data-cy=my-articles]").should(
       "contain.text",
       "How to train your dragon"
     );
-    cy.get("[data-cy=article-title]").first().click()
-    cy.url().should("contain","/how-to-train-your-dragon")
-    cy.get("[data-cy=fav-button]").should("contain.text","Favorite Post (0)").click()
-    cy.get("[data-cy=fav-button]").should("contain.text","Post favorited (3)")
-  })
-
+    cy.get("[data-cy=article-title]")
+      .first()
+      .click();
+    cy.url().should("contain", "/how-to-train-your-dragon");
+    cy.get("[data-cy=fav-button]")
+      .should("contain.text", "Favorite Post (0)")
+      .click();
+    cy.get("[data-cy=fav-button]").should("contain.text", "Post favorited (3)");
+  });
 });

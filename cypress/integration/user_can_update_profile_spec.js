@@ -15,15 +15,7 @@ describe('User can update profile', () => {
       response: "fixture:successful_user_update.json"
     });
     cy.visit("/");
-    cy.get("[data-cy=loginLink]").click();
-    cy.url().should("contain", "/login");
-    [
-      { field: "email", text: "test@mail.com" },
-      { field: "password", text: "password" }
-    ].forEach(element => {
-      cy.get(`[data-cy=${element.field}]`).type(element.text);
-    });
-    cy.get("[data-cy=login-button]").click();
+    cy.loggedInAs('test@mail.com')
     cy.get("[data-cy=settings]").click();
     cy.url().should("contain", "/settings");
     [
