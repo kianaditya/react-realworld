@@ -16,7 +16,7 @@ secureHttp.interceptors.request.use(
     config.headers["Content-Type"] = "application/json"
     return config;
   },
-
+/* istanbul ignore next */
   error => {
     return errorResponse(error);
   }
@@ -25,13 +25,14 @@ http.interceptors.response.use(
   config => {
     return config;
   },
-
+/* istanbul ignore next */
   error => {
     return errorResponse(error);
   }
 );
 
 const errorResponse = error => {
+  /* istanbul ignore next */
   if (error.response) {
     switch (error.response.status) {
       case 500:
@@ -44,14 +45,16 @@ const errorResponse = error => {
         return Promise.reject(error);
     }
   }
+  /* istanbul ignore next */
   if (error.message === "Network Error") {
     throw new Error(
       "We are facing network issues.Please try again after some time."
     );
   }
+  /* istanbul ignore next */
   return Promise.reject(error);
 };
-
+/* istanbul ignore next */
 export default {
   login(data) {
     return http.post("users/login", data);

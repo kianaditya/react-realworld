@@ -46,7 +46,8 @@
       "src/**/*.js"
     ],
     "exclude": [
-      "src/serviceWorker.js"
+      "src/serviceWorker.js",
+      "src/helpers/*.*"
     ]
   }
 }
