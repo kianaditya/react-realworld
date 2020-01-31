@@ -1,5 +1,14 @@
 {
-  "video": false,
-  "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:3001"
+  "baseUrl": "http://localhost:3001",
+  "env": {
+    "apiUrl": "http://localhost:3000",
+    "user": {
+      "email": "tester@test.com",
+      "password": "password1234",
+      "username": "testuser"
+    }
+  },
+  "viewportHeight": 1000,
+  "viewportWidth": 1000,
+  "video": false
 }

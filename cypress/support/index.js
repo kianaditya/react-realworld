@@ -15,9 +15,18 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import '@cypress/code-coverage/support'
+
+const apiUrl = Cypress.env('apiUrl')
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 beforeEach(()=>{
   cy.server()
+  cy.route({
+    method: "GET",
+    status: 200,
+    url: "https://conduit.productionready.io/api/user",
+    response: "fixture:successful_login.json"
+  });
 })

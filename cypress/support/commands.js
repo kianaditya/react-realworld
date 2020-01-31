@@ -24,16 +24,36 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-// Cypress.Commands.add("loggedInAs", uid => {
-//   cy.route({
-//     method: "POST",
-//     status: 200,
-//     url: "https://conduit.productionready.io/api/users/login",
-//     response: "fixture:successful_login.json"
-//   });
-//   window.localStorage.setItem(
-//     "jwt",
-//     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NzYxNjEsInVzZXJuYW1lIjoidGVhY2hlckBtYWlsLmNvbSIsImV4cCI6MTU3OTk1Njc2OH0.q1NeXVrFr2b196zwdQW6h-nUN5I0-xo0tkgmkK3DbFM"
-//   );
-//   cy.visit("/");
-// });
+Cypress.Commands.add("loggedInAs", (user = Cypress.env("user")) => {
+  cy.route({
+    method: "POST",
+    status: 200,
+    url: "https://conduit.productionready.io/api/users/login",
+    response: "fixture:successful_login.json"
+  });
+  cy.visit("/");
+  cy.get("[data-cy=create-article-link]").should("not.exist");
+  cy.get("[data-cy=loginLink]").click();
+  cy.url().should("contain", "/login");
+  [
+    { field: "email", text: "test@mail.com" },
+    { field: "password", text: "password" }
+  ].forEach(element => {
+    cy.get(`[data-cy=${element.field}]`).type(element.text);
+  });
+  cy.get("[data-cy=login-button]").click();
+});
+
+Cypress.Commands.add("login", () => {
+  cy.route({
+    method: "GET",
+    status: 200,
+    url: "https://conduit.productionready.io/api/user",
+    response: "fixture:successful_login.json"
+  });
+  window.localStorage.setItem(
+    "token",
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ODEyNjgsInVzZXJuYW1lIjoiSm9obiBEb2UxMjMxMiIsImV4cCI6MTU4NTY2NTMxNH0.trFBjnvXoUAM5W82qVd-71_PMra3byUV60jLNkEIhj8"
+  );
+  cy.visit("/");
+});

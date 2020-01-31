@@ -1,5 +1,6 @@
 # RealWorld - A Medium Clone
-![](https://github.com/kianaditya/react-realworld/workflows/End-to-end%20tests/badge.svg)
+![](https://github.com/kianaditya/react-realworld/workflows/github%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/kianaditya/react-realworld/badge.svg?branch=cypress_refactor)](https://coveralls.io/github/kianaditya/react-realworld?branch=cypress_refactor)
 
 ## Hosted [here](https://react-conduit-demo.netlify.com/)
 
