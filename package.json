@@ -40,5 +40,13 @@
     "babel-plugin-istanbul": "^6.0.0",
     "istanbul-lib-coverage": "^3.0.0",
     "nyc": "^15.0.0"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/serviceWorker.js"
+    ]
   }
 }
