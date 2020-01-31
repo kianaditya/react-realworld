@@ -6,14 +6,9 @@
       "email": "tester@test.com",
       "password": "password1234",
       "username": "testuser"
-    },
-    "codeCoverage": {
-      "url": "http://localhost:3000/__coverage__"
     }
   },
   "viewportHeight": 1000,
   "viewportWidth": 1000,
-  "video": false,
-  "projectId": "bh5j1d",
-  "nodeVersion": "system"
+  "video": false
 }

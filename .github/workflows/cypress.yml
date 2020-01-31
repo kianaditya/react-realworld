@@ -12,3 +12,7 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           start: npm start
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

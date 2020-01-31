@@ -11,15 +11,6 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-module.exports = (on) => {
-  on('before:browser:launch', (browser = {}, args) => {
-    if (browser.name === 'chrome') {
-
-      args = args.filter((arg) => {
-        return arg !== '--disable-blink-features=RootLayerScrolling'
-      })
-
-      return args
-    }
-  })
+module.exports = (on, config) => {
+  on('task', require('@cypress/code-coverage/task'))
 }
