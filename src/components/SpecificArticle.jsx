@@ -19,28 +19,35 @@ const SpecificArticle = props => {
     onInputChangeHandler
   ] = useSpecificArticle(props);
 
-  const renderComments = comments && comments.map(comment => {
-    return (
-      <div className="card">
-        <div className="card-block">
-    <p>{comment.body}</p>
+  const renderComments =
+    comments &&
+    comments.map(comment => {
+      return (
+        <div key={comment.id} className="card">
+          <div className="card-block">
+            <p key={comment.id}>{comment.body}</p>
+          </div>
+          <div className="card-footer">
+            <a key={comment.author.username} className="comment-author">
+              <img src={comment.author.image} className="comment-author-img" />
+            </a>
+            &nbsp;
+            <a key={comment.id} className="comment-author">
+              {comment.author.username}
+            </a>
+            <span key={comment.id} className="date-posted">
+              {moment(comment.createdAt).format("ddd MMM DD YYYY")}
+            </span>
+            {currentUser.username === comment.author.username && (
+              <span className="mod-options">
+                <i className="ion-edit"></i>
+                <i className="ion-trash-a"></i>
+              </span>
+            )}
+          </div>
         </div>
-        <div className="card-footer">
-                    <a className="comment-author">
-                      <img
-                        src="http://i.imgur.com/Qr71crq.jpg"
-                        className="comment-author-img"
-                      />
-                    </a>
-                    &nbsp;
-                    <a className="comment-author">
-                      Jacob Schmidt
-                    </a>
-                    <span className="date-posted">Dec 29th</span>
-                  </div>
-      </div>
-    );
-  });
+      );
+    });
 
   return (
     <div>
