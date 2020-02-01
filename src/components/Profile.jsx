@@ -75,7 +75,7 @@ const Profile = props => {
           <span>Read more...</span>
         </a> */}
         <Link
-          data-cy="signUpLink"
+          data-cy="specific-article"
           className="nav-link active"
           to={`/article/${article.slug}`}
         >
