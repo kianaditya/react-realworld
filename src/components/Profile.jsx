@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axiosService from "../helpers/axiosService";
 import { AppContext } from "../AppContext";
 
-const Profile = () => {
+const Profile = props => {
   const [state, setState] = useContext(AppContext);
   const [userProfile, setUserProfile] = useState();
   const [userArticles, setUserArticles] = useState([]);
+  const userProfileName = props.match.params.username;
   const fetchUserProfile = async () => {
     try {
       const response = await axiosService.getProfile(
@@ -74,10 +75,19 @@ const Profile = () => {
               <img src={state.currentUser.image} class="user-img" />
               <h4>{state.currentUser.username}</h4>
               <p>{state.currentUser.bio}</p>
-              <button class="btn btn-sm btn-outline-secondary action-btn">
-                <i class="ion-plus-round"></i>
-                &nbsp; Follow ${state.currentUser.username}
-              </button>
+              {state.currentUser.username !== userProfileName ? (
+                <button class="btn btn-sm btn-outline-secondary action-btn">
+                  <i class="ion-plus-round"></i>
+                  &nbsp; Follow ${state.currentUser.username}
+                </button>
+              ) : (
+                <Link to="/settings">
+                <button class="btn btn-sm btn-outline-secondary action-btn">
+                  <i class="ion-plus-round"></i>
+                  &nbsp; Edit profile settings
+                </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -147,11 +157,11 @@ const Profile = () => {
               </a>
             </div>*/}
             {renderUserArticles}
-          </div> 
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Profile;
+export default withRouter(Profile);
