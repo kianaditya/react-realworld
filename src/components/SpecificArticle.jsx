@@ -16,38 +16,40 @@ const SpecificArticle = props => {
     favoriteCount,
     deleteArticle,
     postComment,
+    deleteComment,
+    commentText,
     onInputChangeHandler
   ] = useSpecificArticle(props);
 
-  const renderComments =
-    comments &&
-    comments.map(comment => {
-      return (
-        <div data-cy="comment" key={comment.id} className="card">
-          <div className="card-block">
-            <p data-cy="comment-body" key={comment.id}>{comment.body}</p>
-          </div>
-          <div className="card-footer">
-            <a key={comment.author.username} className="comment-author">
-              <img src={comment.author.image} className="comment-author-img" />
-            </a>
-            &nbsp;
-            <a key={comment.id} className="comment-author">
-              {comment.author.username}
-            </a>
-            <span key={comment.id} className="date-posted">
-              {moment(comment.createdAt).format("ddd MMM DD YYYY")}
-            </span>
-            {currentUser.username === comment.author.username && (
-              <span className="mod-options">
-                <i className="ion-edit"></i>
-                <i className="ion-trash-a"></i>
-              </span>
-            )}
-          </div>
+  const renderComments = comments.map(comment => {
+    return (
+      <div data-cy="comment" key={comment.id} className="card">
+        <div className="card-block">
+          <p data-cy="comment-body">{comment.body}</p>
         </div>
-      );
-    });
+        <div className="card-footer">
+          <a className="comment-author">
+            <img src={comment.author.image} className="comment-author-img" />
+          </a>
+          &nbsp;
+          <a className="comment-author">{comment.author.username}</a>
+          <span className="date-posted">
+            {moment(comment.createdAt).format("ddd MMM DD YYYY")}
+          </span>
+          {currentUser.username === comment.author.username && (
+            <span className="mod-options">
+              <i className="ion-edit"></i>
+              <i
+                className="ion-trash-a"
+                onClick={() => deleteComment(comment.id)}
+                data-cy="delete-comment"
+              ></i>
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div>
@@ -140,11 +142,12 @@ const SpecificArticle = props => {
                       rows="3"
                       name="commentText"
                       onChange={onInputChangeHandler}
+                      value={commentText}
                     ></textarea>
                   </div>
                   <div className="card-footer">
                     <img
-                      src="http://i.imgur.com/Qr71crq.jpg"
+                      src={currentUser.image}
                       className="comment-author-img"
                     />
                     <button
@@ -155,54 +158,6 @@ const SpecificArticle = props => {
                     </button>
                   </div>
                 </form>
-
-                {/* <div className="card">
-                  <div className="card-block">
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="" className="comment-author">
-                      <img
-                        src="http://i.imgur.com/Qr71crq.jpg"
-                        className="comment-author-img"
-                      />
-                    </a>
-                    &nbsp;
-                    <a href="" className="comment-author">
-                      Jacob Schmidt
-                    </a>
-                    <span className="date-posted">Dec 29th</span>
-                  </div>
-                </div> */}
-
-                {/* <div className="card">
-                  <div className="card-block">
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="" className="comment-author">
-                      <img
-                        src="http://i.imgur.com/Qr71crq.jpg"
-                        className="comment-author-img"
-                      />
-                    </a>
-                    &nbsp;
-                    <a href="" className="comment-author">
-                      Jacob Schmidt
-                    </a>
-                    <span className="date-posted">Dec 29th</span>
-                    <span className="mod-options">
-                      <i className="ion-edit"></i>
-                      <i className="ion-trash-a"></i>
-                    </span>
-                  </div>
-                </div> */}
                 {renderComments}
               </div>
             </div>
@@ -217,15 +172,15 @@ export default withRouter(SpecificArticle);
 
 const useSpecificArticle = props => {
   const [state, setState] = useContext(AppContext);
-  const [formData, setFormData] = useState({});
+  const [commentText, setCommentText] = useState();
   const [article, setArticle] = useState();
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const [followStatus, setFollowStatus] = useState();
   const [favorite, setFavorite] = useState();
   const [favoriteCount, setFavoriteCount] = useState(0);
   const slug = props.history.location.pathname.split("/")[2];
   const onInputChangeHandler = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setCommentText(e.target.value);
   };
   const fetchSpecificArticle = async () => {
     const response = await axios.getSpecificArticle(slug);
@@ -233,8 +188,14 @@ const useSpecificArticle = props => {
     setFollowStatus(response.data.article.author.following);
   };
   const fetchComments = async () => {
-    const response = await axios.getComments(slug);
-    setComments(response.data.comments);
+    try {
+      const response = await axios.getComments(slug);
+      setComments(
+        response.data.comments !== comments && response.data.comments
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
   const toggleFollow = async () => {
     if (followStatus) {
@@ -267,15 +228,29 @@ const useSpecificArticle = props => {
   const postComment = async e => {
     e.preventDefault();
     const comment = {
-      body: formData.commentText
+      body: commentText
     };
-    const response = await axios.addComment(article.slug, comment);
-    fetchComments();
+    try {
+      const response = await axios.addComment(article.slug, comment);
+      setCommentText("")
+      fetchComments();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const deleteComment = async id => {
+    try {
+      const response = await axios.deleteComments(article.slug, id);
+      fetchComments();
+    } catch (error) {
+      console.error(error);
+    }
   };
   useEffect(() => {
     fetchSpecificArticle();
     fetchComments();
   }, []);
+
   return [
     state.currentUser,
     article,
@@ -287,6 +262,8 @@ const useSpecificArticle = props => {
     favoriteCount,
     deleteArticle,
     postComment,
+    deleteComment,
+    commentText,
     onInputChangeHandler
   ];
 };

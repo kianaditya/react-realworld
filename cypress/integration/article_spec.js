@@ -18,6 +18,26 @@ describe("Article management", () => {
       url: "https://conduit.productionready.io/api/articles/test-article",
       response: "fixture:updated_test_article.json"
     });
+    cy.route({
+      method: "POST",
+      url:
+        "https://conduit.productionready.io/api/articles/test-article/comments",
+      response: "fixture:comments.json"
+    });
+    cy.route({
+      method: "GET",
+      url:
+        "https://conduit.productionready.io/api/articles/test-article/comments",
+      response: "fixture:comments.json"
+    });
+    cy.route({
+      method: "DELETE",
+      url:
+        "https://conduit.productionready.io/api/articles/test-article/comments/53676",
+      response: {
+        comments: []
+      }
+    });
   });
   const article = {
     title: "test title",
@@ -77,7 +97,7 @@ describe("Article management", () => {
     cy.get("[data-cy=article-title]").should("contain", "test title 2");
   });
 
-  it("write a comment", () => {
+  it("write and delete a comment", () => {
     cy.url().should("not.contain", "/create");
     cy.get("[data-cy=create-article-link]").click();
     courseManagement.writeArticle(article);
@@ -85,5 +105,15 @@ describe("Article management", () => {
 
     courseManagement.writeComment("great post");
     cy.contains("[data-cy=comment]", "great post").should("be.visible");
+    cy.route({
+      method: "GET",
+      url:
+        "https://conduit.productionready.io/api/articles/test-article/comments",
+      response: {
+        comments: []
+      }
+    });
+    cy.get("[data-cy=delete-comment]").click({ force: true });
+    cy.get("[data-cy=comment-body]").should("not.contain", "great post");
   });
 });
