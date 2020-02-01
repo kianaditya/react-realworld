@@ -14,7 +14,9 @@ const SpecificArticle = props => {
     favorite,
     toggleFavorite,
     favoriteCount,
-    deleteArticle
+    deleteArticle,
+    postComment,
+    onInputChangeHandler
   ] = useSpecificArticle(props);
 
   return (
@@ -42,10 +44,12 @@ const SpecificArticle = props => {
                     <button
                       className="btn btn-sm btn-outline-secondary"
                       data-cy="edit-article"
-                      onClick={()=> props.history.push({
-                        pathname: `/update/${article.slug}`,
-                        state: {article}
-                      })}
+                      onClick={() =>
+                        props.history.push({
+                          pathname: `/update/${article.slug}`,
+                          state: { article }
+                        })
+                      }
                     >
                       Edit Article
                     </button>
@@ -90,22 +94,22 @@ const SpecificArticle = props => {
           <div className="container page">
             <div className="row article-content">
               <div className="col-md-12">
-                <p>{article.body}</p>
-                {/* <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-                <p>
-                  It's a great solution for learning how other frameworks work.
-                </p> */}
+                <h2>{article.body}</h2>
+                <p>{article.description}</p>
               </div>
             </div>
             <hr />
             <div className="row">
               <div className="col-xs-12 col-md-8 offset-md-2">
-                <form className="card comment-form">
+                <form className="card comment-form" onSubmit={postComment}>
                   <div className="card-block">
                     <textarea
+                      data-cy="comment-text"
                       className="form-control"
                       placeholder="Write a comment..."
                       rows="3"
+                      name="commentText"
+                      onChange={onInputChangeHandler}
                     ></textarea>
                   </div>
                   <div className="card-footer">
@@ -113,7 +117,10 @@ const SpecificArticle = props => {
                       src="http://i.imgur.com/Qr71crq.jpg"
                       className="comment-author-img"
                     />
-                    <button className="btn btn-sm btn-primary">
+                    <button
+                      data-cy="post-comment"
+                      className="btn btn-sm btn-primary"
+                    >
                       Post Comment
                     </button>
                   </div>
@@ -179,12 +186,16 @@ export default withRouter(SpecificArticle);
 
 const useSpecificArticle = props => {
   const [state, setState] = useContext(AppContext);
+  const [formData, setFormData] = useState({});
   const [article, setArticle] = useState();
   const [comments, setComments] = useState();
   const [followStatus, setFollowStatus] = useState();
   const [favorite, setFavorite] = useState();
   const [favoriteCount, setFavoriteCount] = useState(0);
   const slug = props.history.location.pathname.split("/")[2];
+  const onInputChangeHandler = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const fetchSpecificArticle = async () => {
     const response = await axios.getSpecificArticle(slug);
     setArticle(response.data.article);
@@ -222,6 +233,14 @@ const useSpecificArticle = props => {
       console.error(error);
     }
   };
+  const postComment = async e => {
+    e.preventDefault();
+    const comment = {
+      body: formData.commentText
+    };
+    const response = await axios.addComment(article.slug, comment);
+    fetchComments();
+  };
   useEffect(() => {
     fetchSpecificArticle();
     fetchComments();
@@ -235,6 +254,8 @@ const useSpecificArticle = props => {
     favorite,
     toggleFavorite,
     favoriteCount,
-    deleteArticle
+    deleteArticle,
+    postComment,
+    onInputChangeHandler
   ];
 };
