@@ -104,7 +104,7 @@ export default {
   fetchTags() {
     return http.get("tags");
   },
-  addComments(slug, data) {
+  addComment(slug, data) {
     return secureHttp.post(`articles/${slug}/comments`, data);
   },
   getComments(slug) {

@@ -14,8 +14,42 @@ const SpecificArticle = props => {
     favorite,
     toggleFavorite,
     favoriteCount,
-    deleteArticle
+    deleteArticle,
+    postComment,
+    deleteComment,
+    commentText,
+    onInputChangeHandler
   ] = useSpecificArticle(props);
+
+  const renderComments = comments.map(comment => {
+    return (
+      <div data-cy="comment" key={comment.id} className="card">
+        <div className="card-block">
+          <p data-cy="comment-body">{comment.body}</p>
+        </div>
+        <div className="card-footer">
+          <a className="comment-author">
+            <img src={comment.author.image} className="comment-author-img" />
+          </a>
+          &nbsp;
+          <a className="comment-author">{comment.author.username}</a>
+          <span className="date-posted">
+            {moment(comment.createdAt).format("ddd MMM DD YYYY")}
+          </span>
+          {currentUser.username === comment.author.username && (
+            <span className="mod-options">
+              <i className="ion-edit"></i>
+              <i
+                className="ion-trash-a"
+                onClick={() => deleteComment(comment.id)}
+                data-cy="delete-comment"
+              ></i>
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div>
@@ -23,7 +57,7 @@ const SpecificArticle = props => {
         <div className="article-page">
           <div className="banner">
             <div className="container">
-              <h1>{article.title}</h1>
+              <h1 data-cy="article-title">{article.title}</h1>
 
               <div className="article-meta">
                 <a href="">
@@ -41,10 +75,13 @@ const SpecificArticle = props => {
                   <>
                     <button
                       className="btn btn-sm btn-outline-secondary"
-                      onClick={()=> props.history.push({
-                        pathname: `/update/${article.slug}`,
-                        state: {article}
-                      })}
+                      data-cy="edit-article"
+                      onClick={() =>
+                        props.history.push({
+                          pathname: `/update/${article.slug}`,
+                          state: { article }
+                        })
+                      }
                     >
                       Edit Article
                     </button>
@@ -89,82 +126,39 @@ const SpecificArticle = props => {
           <div className="container page">
             <div className="row article-content">
               <div className="col-md-12">
-                <p>{article.body}</p>
-                {/* <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-                <p>
-                  It's a great solution for learning how other frameworks work.
-                </p> */}
+                <h2>{article.body}</h2>
+                <p>{article.description}</p>
               </div>
             </div>
             <hr />
             <div className="row">
               <div className="col-xs-12 col-md-8 offset-md-2">
-                <form className="card comment-form">
+                <form className="card comment-form" onSubmit={postComment}>
                   <div className="card-block">
                     <textarea
+                      data-cy="comment-text"
                       className="form-control"
                       placeholder="Write a comment..."
                       rows="3"
+                      name="commentText"
+                      onChange={onInputChangeHandler}
+                      value={commentText}
                     ></textarea>
                   </div>
                   <div className="card-footer">
                     <img
-                      src="http://i.imgur.com/Qr71crq.jpg"
+                      src={currentUser.image}
                       className="comment-author-img"
                     />
-                    <button className="btn btn-sm btn-primary">
+                    <button
+                      data-cy="post-comment"
+                      className="btn btn-sm btn-primary"
+                    >
                       Post Comment
                     </button>
                   </div>
                 </form>
-
-                {/* <div className="card">
-                  <div className="card-block">
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="" className="comment-author">
-                      <img
-                        src="http://i.imgur.com/Qr71crq.jpg"
-                        className="comment-author-img"
-                      />
-                    </a>
-                    &nbsp;
-                    <a href="" className="comment-author">
-                      Jacob Schmidt
-                    </a>
-                    <span className="date-posted">Dec 29th</span>
-                  </div>
-                </div> */}
-
-                {/* <div className="card">
-                  <div className="card-block">
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="" className="comment-author">
-                      <img
-                        src="http://i.imgur.com/Qr71crq.jpg"
-                        className="comment-author-img"
-                      />
-                    </a>
-                    &nbsp;
-                    <a href="" className="comment-author">
-                      Jacob Schmidt
-                    </a>
-                    <span className="date-posted">Dec 29th</span>
-                    <span className="mod-options">
-                      <i className="ion-edit"></i>
-                      <i className="ion-trash-a"></i>
-                    </span>
-                  </div>
-                </div> */}
+                {renderComments}
               </div>
             </div>
           </div>
@@ -178,20 +172,30 @@ export default withRouter(SpecificArticle);
 
 const useSpecificArticle = props => {
   const [state, setState] = useContext(AppContext);
+  const [commentText, setCommentText] = useState();
   const [article, setArticle] = useState();
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const [followStatus, setFollowStatus] = useState();
   const [favorite, setFavorite] = useState();
   const [favoriteCount, setFavoriteCount] = useState(0);
   const slug = props.history.location.pathname.split("/")[2];
+  const onInputChangeHandler = e => {
+    setCommentText(e.target.value);
+  };
   const fetchSpecificArticle = async () => {
     const response = await axios.getSpecificArticle(slug);
     setArticle(response.data.article);
     setFollowStatus(response.data.article.author.following);
   };
   const fetchComments = async () => {
-    const response = await axios.getComments(slug);
-    setComments(response.data.comments);
+    try {
+      const response = await axios.getComments(slug);
+      setComments(
+        response.data.comments !== comments && response.data.comments
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
   const toggleFollow = async () => {
     if (followStatus) {
@@ -221,10 +225,32 @@ const useSpecificArticle = props => {
       console.error(error);
     }
   };
+  const postComment = async e => {
+    e.preventDefault();
+    const comment = {
+      body: commentText
+    };
+    try {
+      const response = await axios.addComment(article.slug, comment);
+      setCommentText("")
+      fetchComments();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const deleteComment = async id => {
+    try {
+      const response = await axios.deleteComments(article.slug, id);
+      fetchComments();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     fetchSpecificArticle();
     fetchComments();
   }, []);
+
   return [
     state.currentUser,
     article,
@@ -234,6 +260,10 @@ const useSpecificArticle = props => {
     favorite,
     toggleFavorite,
     favoriteCount,
-    deleteArticle
+    deleteArticle,
+    postComment,
+    deleteComment,
+    commentText,
+    onInputChangeHandler
   ];
 };

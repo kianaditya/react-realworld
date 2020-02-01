@@ -1,0 +1,17 @@
+{
+  "comments": [
+    
+    {
+      "id": 53676,
+      "createdAt": "2020-02-01T10:07:26.130Z",
+      "updatedAt": "2020-02-01T10:07:26.130Z",
+      "body": "great post",
+      "author": {
+        "username": "test@mail.com",
+        "bio": "",
+        "image": "",
+        "following": false
+      }
+    }
+  ]
+}

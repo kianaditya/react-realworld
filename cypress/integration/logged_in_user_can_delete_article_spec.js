@@ -11,12 +11,12 @@ describe("User can delete article", () => {
       url:
         "https://conduit.productionready.io/api/articles/how-to-train-your-dragon",
       status: 200,
-      response: "fixture:single_article.json"
+      response: "fixture:test_article.json"
     });
     cy.route({
       method: "DELETE",
       url:
-        "https://conduit.productionready.io/api/articles/how-to-train-your-dragon",
+        "https://conduit.productionready.io/api/articles/test-article",
       status: 200,
       response: {}
     });
