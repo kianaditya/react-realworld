@@ -48,7 +48,10 @@ describe("Article management", () => {
         .type(tagsToCypress(article.tagList));
       cy.get("[data-cy=submit-article]").click();
     },
-    writeComment(comment) {}
+    writeComment(comment) {
+      cy.get("[data-cy=comment-text]").type(comment);
+      cy.get("[data-cy=post-comment]").click();
+    }
   };
 
   it("create a new article", () => {
@@ -74,15 +77,13 @@ describe("Article management", () => {
     cy.get("[data-cy=article-title]").should("contain", "test title 2");
   });
 
-  it.only("write a comment", () => {
+  it("write a comment", () => {
     cy.url().should("not.contain", "/create");
     cy.get("[data-cy=create-article-link]").click();
     courseManagement.writeArticle(article);
     cy.url().should("contain", "/article/test-article");
 
-    cy.get("[data-cy=comment-text]").type("great post 👍");
-    cy.get("[data-cy=post-comment]").click();
-
-    cy.contains("[data-cy=comment]", "great post 👍").should("be.visible");
+    courseManagement.writeComment("great post");
+    cy.contains("[data-cy=comment]", "great post").should("be.visible");
   });
 });

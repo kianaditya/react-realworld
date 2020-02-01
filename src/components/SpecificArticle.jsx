@@ -23,9 +23,9 @@ const SpecificArticle = props => {
     comments &&
     comments.map(comment => {
       return (
-        <div key={comment.id} className="card">
+        <div data-cy="comment" key={comment.id} className="card">
           <div className="card-block">
-            <p key={comment.id}>{comment.body}</p>
+            <p data-cy="comment-body" key={comment.id}>{comment.body}</p>
           </div>
           <div className="card-footer">
             <a key={comment.author.username} className="comment-author">
