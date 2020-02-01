@@ -1,0 +1,19 @@
+{
+  "article": {
+    "slug": "test-article",
+    "title": "test title",
+    "description": "about test",
+    "body": "This is a test post",
+    "tagList": ["test"],
+    "createdAt": "2016-02-18T03:22:56.637Z",
+    "updatedAt": "2016-02-18T03:48:35.824Z",
+    "favorited": false,
+    "favoritesCount": 0,
+    "author": {
+      "username": "test@mail.com",
+      "bio": "I am a test account",
+      "image": "https://i.stack.imgur.com/xHWG8.jpg",
+      "following": false
+    }
+  }
+}

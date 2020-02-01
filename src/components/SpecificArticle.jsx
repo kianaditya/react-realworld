@@ -23,7 +23,7 @@ const SpecificArticle = props => {
         <div className="article-page">
           <div className="banner">
             <div className="container">
-              <h1>{article.title}</h1>
+              <h1 data-cy="article-title">{article.title}</h1>
 
               <div className="article-meta">
                 <a href="">
@@ -41,6 +41,7 @@ const SpecificArticle = props => {
                   <>
                     <button
                       className="btn btn-sm btn-outline-secondary"
+                      data-cy="edit-article"
                       onClick={()=> props.history.push({
                         pathname: `/update/${article.slug}`,
                         state: {article}
