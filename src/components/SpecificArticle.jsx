@@ -19,6 +19,29 @@ const SpecificArticle = props => {
     onInputChangeHandler
   ] = useSpecificArticle(props);
 
+  const renderComments = comments && comments.map(comment => {
+    return (
+      <div className="card">
+        <div className="card-block">
+    <p>{comment.body}</p>
+        </div>
+        <div className="card-footer">
+                    <a className="comment-author">
+                      <img
+                        src="http://i.imgur.com/Qr71crq.jpg"
+                        className="comment-author-img"
+                      />
+                    </a>
+                    &nbsp;
+                    <a className="comment-author">
+                      Jacob Schmidt
+                    </a>
+                    <span className="date-posted">Dec 29th</span>
+                  </div>
+      </div>
+    );
+  });
+
   return (
     <div>
       {article && (
@@ -173,6 +196,7 @@ const SpecificArticle = props => {
                     </span>
                   </div>
                 </div> */}
+                {renderComments}
               </div>
             </div>
           </div>
