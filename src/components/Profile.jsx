@@ -103,7 +103,10 @@ const Profile = props => {
                 </button>
               ) : (
                 <Link to="/settings">
-                  <button className="btn btn-sm btn-outline-secondary action-btn">
+                  <button
+                    data-cy="profile-to-settings"
+                    className="btn btn-sm btn-outline-secondary action-btn"
+                  >
                     <i className="ion-plus-round"></i>
                     &nbsp; Edit profile settings
                   </button>
@@ -127,6 +130,7 @@ const Profile = props => {
                         : "nav-link disabled"
                     }
                     onClick={() => setActiveTab("myArticles")}
+                    data-cy="my-articles"
                   >
                     My Articles
                   </a>
@@ -139,6 +143,7 @@ const Profile = props => {
                         : "nav-link disabled"
                     }
                     onClick={() => setActiveTab("favArticles")}
+                    data-cy="fav-articles"
                   >
                     Favorited Articles
                   </a>

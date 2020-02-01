@@ -29,4 +29,22 @@ beforeEach(()=>{
     url: "https://conduit.productionready.io/api/user",
     response: "fixture:successful_login.json"
   });
+  cy.route({
+    method: "GET",
+    url: "https://conduit.productionready.io/api/articles",
+    status: 200,
+    response: "fixture:article_list.json"
+  });
+  cy.route({
+    method: "GET",
+    url: "https://conduit.productionready.io/api/tags",
+    status: 200,
+    response: "fixture:tags.json"
+  });
+  cy.route({
+    method: "GET",
+    url: "https://conduit.productionready.io/api/articles/feed",
+    status: 200,
+    response: "fixture:own_article_list.json"
+  });
 })
