@@ -30,7 +30,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link data-cy="settings" className="nav-link" to={`/profile/${state.currentUser.username}`}>
+                  <Link data-cy="profile" className="nav-link" to={`/profile/${state.currentUser.username}`}>
                     &nbsp;{state.currentUser.username}
                   </Link>
                 </li>

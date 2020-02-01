@@ -128,7 +128,7 @@
           "column": 15
         },
         "end": {
-          "line": 61,
+          "line": 66,
           "column": 1
         }
       },
@@ -148,7 +148,7 @@
           "column": 2
         },
         "end": {
-          "line": 60,
+          "line": 65,
           "column": 4
         }
       }
@@ -172,7 +172,7 @@
             "column": 21
           },
           "end": {
-            "line": 61,
+            "line": 66,
             "column": 1
           }
         },
@@ -187,7 +187,7 @@
             "column": 13
           },
           "end": {
-            "line": 33,
+            "line": 38,
             "column": 13
           }
         },
@@ -209,7 +209,7 @@
               "column": 14
             },
             "end": {
-              "line": 32,
+              "line": 37,
               "column": 17
             }
           }
@@ -219,11 +219,11 @@
       "1": {
         "loc": {
           "start": {
-            "line": 34,
+            "line": 39,
             "column": 13
           },
           "end": {
-            "line": 55,
+            "line": 60,
             "column": 13
           }
         },
@@ -231,26 +231,26 @@
         "locations": [
           {
             "start": {
-              "line": 34,
+              "line": 39,
               "column": 13
             },
             "end": {
-              "line": 34,
+              "line": 39,
               "column": 42
             }
           },
           {
             "start": {
-              "line": 35,
+              "line": 40,
               "column": 14
             },
             "end": {
-              "line": 54,
+              "line": 59,
               "column": 17
             }
           }
         ],
-        "line": 34
+        "line": 39
       }
     },
     "s": {
@@ -272,7 +272,7 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f98037cdcc17afb714f0b0f770d734bcfd80519d"
+    "hash": "401a6d681a1383a5d76a56e47df788a55ecca2b0"
   },
   "/home/aditya/projects/react-realworld/src/components/Footer.js": {
     "path": "/home/aditya/projects/react-realworld/src/components/Footer.js",
@@ -389,10 +389,10 @@
     "branchMap": {},
     "s": {
       "0": 17,
-      "1": 114
+      "1": 113
     },
     "f": {
-      "0": 114
+      "0": 113
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
@@ -539,14 +539,14 @@
     "branchMap": {},
     "s": {
       "0": 17,
-      "1": 80,
+      "1": 76,
       "2": 17,
       "3": 2,
       "4": 17,
       "5": 1
     },
     "f": {
-      "0": 80,
+      "0": 76,
       "1": 2,
       "2": 1
     },
@@ -1598,95 +1598,95 @@
     },
     "s": {
       "0": 17,
-      "1": 125,
-      "2": 125,
-      "3": 49,
-      "4": 125,
+      "1": 123,
+      "2": 123,
+      "3": 51,
+      "4": 123,
       "5": 342,
-      "6": 125,
+      "6": 123,
       "7": 0,
       "8": 3,
       "9": 17,
-      "10": 125,
-      "11": 125,
-      "12": 125,
-      "13": 125,
-      "14": 125,
-      "15": 125,
-      "16": 125,
-      "17": 125,
+      "10": 123,
+      "11": 123,
+      "12": 123,
+      "13": 123,
+      "14": 123,
+      "15": 123,
+      "16": 123,
+      "17": 123,
       "18": 23,
       "19": 16,
-      "20": 125,
-      "21": 22,
-      "22": 14,
-      "23": 125,
+      "20": 123,
+      "21": 20,
+      "22": 13,
+      "23": 123,
       "24": 23,
-      "25": 15,
-      "26": 125,
-      "27": 50,
-      "28": 18,
+      "25": 14,
+      "26": 123,
+      "27": 49,
+      "28": 17,
       "29": 32,
-      "30": 125,
-      "31": 40,
-      "32": 40,
-      "33": 125,
+      "30": 123,
+      "31": 38,
+      "32": 38,
+      "33": 123,
       "34": 23,
       "35": 23,
-      "36": 125,
-      "37": 40,
-      "38": 125,
-      "39": 50,
-      "40": 125
+      "36": 123,
+      "37": 38,
+      "38": 123,
+      "39": 49,
+      "40": 123
     },
     "f": {
-      "0": 125,
-      "1": 49,
+      "0": 123,
+      "1": 51,
       "2": 342,
       "3": 0,
       "4": 3,
-      "5": 125,
+      "5": 123,
       "6": 23,
-      "7": 22,
+      "7": 20,
       "8": 23,
-      "9": 50,
-      "10": 40,
+      "9": 49,
+      "10": 38,
       "11": 23,
-      "12": 40,
-      "13": 50
+      "12": 38,
+      "13": 49
     },
     "b": {
       "0": [
-        59,
-        66
+        56,
+        67
       ],
       "1": [
-        125,
-        59
+        123,
+        56
       ],
       "2": [
-        55,
+        52,
         4
       ],
       "3": [
-        70,
-        55
+        71,
+        52
       ],
       "4": [
-        25,
-        100
+        26,
+        97
       ],
       "5": [
-        18,
+        17,
         32
       ],
       "6": [
-        40,
-        22
+        38,
+        20
       ],
       "7": [
-        40,
-        22
+        38,
+        20
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
@@ -3114,23 +3114,23 @@
     },
     "s": {
       "0": 17,
-      "1": 268,
-      "2": 268,
-      "3": 268,
+      "1": 269,
+      "2": 269,
+      "3": 269,
       "4": 5,
-      "5": 268,
+      "5": 269,
       "6": 262,
-      "7": 268,
+      "7": 269,
       "8": 5,
       "9": 5,
       "10": 5,
       "11": 5,
       "12": 5,
       "13": 0,
-      "14": 268
+      "14": 269
     },
     "f": {
-      "0": 268,
+      "0": 269,
       "1": 5,
       "2": 262,
       "3": 5
@@ -3147,536 +3147,6 @@
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
     "hash": "647888505f3fbcec80567f934658bd36e6cbba8f"
-  },
-  "/home/aditya/projects/react-realworld/src/App.jsx": {
-    "path": "/home/aditya/projects/react-realworld/src/App.jsx",
-    "statementMap": {
-      "0": {
-        "start": {
-          "line": 16,
-          "column": 12
-        },
-        "end": {
-          "line": 47,
-          "column": 1
-        }
-      },
-      "1": {
-        "start": {
-          "line": 17,
-          "column": 28
-        },
-        "end": {
-          "line": 17,
-          "column": 50
-        }
-      },
-      "2": {
-        "start": {
-          "line": 18,
-          "column": 20
-        },
-        "end": {
-          "line": 27,
-          "column": 3
-        }
-      },
-      "3": {
-        "start": {
-          "line": 19,
-          "column": 18
-        },
-        "end": {
-          "line": 19,
-          "column": 28
-        }
-      },
-      "4": {
-        "start": {
-          "line": 20,
-          "column": 4
-        },
-        "end": {
-          "line": 26,
-          "column": 5
-        }
-      },
-      "5": {
-        "start": {
-          "line": 21,
-          "column": 23
-        },
-        "end": {
-          "line": 21,
-          "column": 44
-        }
-      },
-      "6": {
-        "start": {
-          "line": 22,
-          "column": 6
-        },
-        "end": {
-          "line": 25,
-          "column": 10
-        }
-      },
-      "7": {
-        "start": {
-          "line": 22,
-          "column": 25
-        },
-        "end": {
-          "line": 25,
-          "column": 7
-        }
-      },
-      "8": {
-        "start": {
-          "line": 28,
-          "column": 2
-        },
-        "end": {
-          "line": 30,
-          "column": 35
-        }
-      },
-      "9": {
-        "start": {
-          "line": 29,
-          "column": 4
-        },
-        "end": {
-          "line": 29,
-          "column": 15
-        }
-      },
-      "10": {
-        "start": {
-          "line": 32,
-          "column": 2
-        },
-        "end": {
-          "line": 46,
-          "column": 4
-        }
-      },
-      "11": {
-        "start": {
-          "line": 36,
-          "column": 44
-        },
-        "end": {
-          "line": 36,
-          "column": 59
-        }
-      },
-      "12": {
-        "start": {
-          "line": 37,
-          "column": 44
-        },
-        "end": {
-          "line": 37,
-          "column": 64
-        }
-      },
-      "13": {
-        "start": {
-          "line": 38,
-          "column": 43
-        },
-        "end": {
-          "line": 38,
-          "column": 56
-        }
-      },
-      "14": {
-        "start": {
-          "line": 39,
-          "column": 46
-        },
-        "end": {
-          "line": 39,
-          "column": 58
-        }
-      },
-      "15": {
-        "start": {
-          "line": 40,
-          "column": 51
-        },
-        "end": {
-          "line": 40,
-          "column": 70
-        }
-      },
-      "16": {
-        "start": {
-          "line": 41,
-          "column": 45
-        },
-        "end": {
-          "line": 41,
-          "column": 69
-        }
-      },
-      "17": {
-        "start": {
-          "line": 42,
-          "column": 51
-        },
-        "end": {
-          "line": 42,
-          "column": 75
-        }
-      }
-    },
-    "fnMap": {
-      "0": {
-        "name": "(anonymous_0)",
-        "decl": {
-          "start": {
-            "line": 16,
-            "column": 12
-          },
-          "end": {
-            "line": 16,
-            "column": 13
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 16,
-            "column": 18
-          },
-          "end": {
-            "line": 47,
-            "column": 1
-          }
-        },
-        "line": 16
-      },
-      "1": {
-        "name": "(anonymous_1)",
-        "decl": {
-          "start": {
-            "line": 18,
-            "column": 20
-          },
-          "end": {
-            "line": 18,
-            "column": 21
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 18,
-            "column": 32
-          },
-          "end": {
-            "line": 27,
-            "column": 3
-          }
-        },
-        "line": 18
-      },
-      "2": {
-        "name": "(anonymous_2)",
-        "decl": {
-          "start": {
-            "line": 22,
-            "column": 15
-          },
-          "end": {
-            "line": 22,
-            "column": 16
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 22,
-            "column": 25
-          },
-          "end": {
-            "line": 25,
-            "column": 7
-          }
-        },
-        "line": 22
-      },
-      "3": {
-        "name": "(anonymous_3)",
-        "decl": {
-          "start": {
-            "line": 28,
-            "column": 12
-          },
-          "end": {
-            "line": 28,
-            "column": 13
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 28,
-            "column": 16
-          },
-          "end": {
-            "line": 30,
-            "column": 3
-          }
-        },
-        "line": 28
-      },
-      "4": {
-        "name": "(anonymous_4)",
-        "decl": {
-          "start": {
-            "line": 36,
-            "column": 38
-          },
-          "end": {
-            "line": 36,
-            "column": 39
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 36,
-            "column": 44
-          },
-          "end": {
-            "line": 36,
-            "column": 59
-          }
-        },
-        "line": 36
-      },
-      "5": {
-        "name": "(anonymous_5)",
-        "decl": {
-          "start": {
-            "line": 37,
-            "column": 38
-          },
-          "end": {
-            "line": 37,
-            "column": 39
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 37,
-            "column": 44
-          },
-          "end": {
-            "line": 37,
-            "column": 64
-          }
-        },
-        "line": 37
-      },
-      "6": {
-        "name": "(anonymous_6)",
-        "decl": {
-          "start": {
-            "line": 38,
-            "column": 37
-          },
-          "end": {
-            "line": 38,
-            "column": 38
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 38,
-            "column": 43
-          },
-          "end": {
-            "line": 38,
-            "column": 56
-          }
-        },
-        "line": 38
-      },
-      "7": {
-        "name": "(anonymous_7)",
-        "decl": {
-          "start": {
-            "line": 39,
-            "column": 40
-          },
-          "end": {
-            "line": 39,
-            "column": 41
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 39,
-            "column": 46
-          },
-          "end": {
-            "line": 39,
-            "column": 58
-          }
-        },
-        "line": 39
-      },
-      "8": {
-        "name": "(anonymous_8)",
-        "decl": {
-          "start": {
-            "line": 40,
-            "column": 45
-          },
-          "end": {
-            "line": 40,
-            "column": 46
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 40,
-            "column": 51
-          },
-          "end": {
-            "line": 40,
-            "column": 70
-          }
-        },
-        "line": 40
-      },
-      "9": {
-        "name": "(anonymous_9)",
-        "decl": {
-          "start": {
-            "line": 41,
-            "column": 39
-          },
-          "end": {
-            "line": 41,
-            "column": 40
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 41,
-            "column": 45
-          },
-          "end": {
-            "line": 41,
-            "column": 69
-          }
-        },
-        "line": 41
-      },
-      "10": {
-        "name": "(anonymous_10)",
-        "decl": {
-          "start": {
-            "line": 42,
-            "column": 45
-          },
-          "end": {
-            "line": 42,
-            "column": 46
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 42,
-            "column": 51
-          },
-          "end": {
-            "line": 42,
-            "column": 75
-          }
-        },
-        "line": 42
-      }
-    },
-    "branchMap": {
-      "0": {
-        "loc": {
-          "start": {
-            "line": 20,
-            "column": 4
-          },
-          "end": {
-            "line": 26,
-            "column": 5
-          }
-        },
-        "type": "if",
-        "locations": [
-          {
-            "start": {
-              "line": 20,
-              "column": 4
-            },
-            "end": {
-              "line": 26,
-              "column": 5
-            }
-          },
-          {
-            "start": {
-              "line": 20,
-              "column": 4
-            },
-            "end": {
-              "line": 26,
-              "column": 5
-            }
-          }
-        ],
-        "line": 20
-      }
-    },
-    "s": {
-      "0": 17,
-      "1": 40,
-      "2": 40,
-      "3": 29,
-      "4": 29,
-      "5": 19,
-      "6": 18,
-      "7": 18,
-      "8": 40,
-      "9": 29,
-      "10": 40,
-      "11": 41,
-      "12": 2,
-      "13": 4,
-      "14": 3,
-      "15": 8,
-      "16": 5,
-      "17": 0
-    },
-    "f": {
-      "0": 40,
-      "1": 29,
-      "2": 18,
-      "3": 29,
-      "4": 41,
-      "5": 2,
-      "6": 4,
-      "7": 3,
-      "8": 8,
-      "9": 5,
-      "10": 0
-    },
-    "b": {
-      "0": [
-        19,
-        10
-      ]
-    },
-    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "0c14b25678495cf4e0c8d75365b26904c6eae460"
   },
   "/home/aditya/projects/react-realworld/src/serviceWorker.js": {
     "path": "/home/aditya/projects/react-realworld/src/serviceWorker.js",
