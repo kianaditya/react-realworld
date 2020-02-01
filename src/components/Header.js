@@ -29,6 +29,11 @@ const Header = () => {
                     <i className="ion-gear-a"></i>&nbsp;Settings
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link data-cy="settings" className="nav-link" to={`/profile/${state.currentUser.username}`}>
+                    <i className="ion-gear-a"></i>&nbsp;${state.currentUser.username}
+                  </Link>
+                </li>
               </>
             )}
             {!state.currentUser.isSignedIn && (

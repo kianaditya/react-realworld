@@ -80,6 +80,9 @@ export default {
   getArticles() {
     return http.get("articles");
   },
+  getUserArticles(username) {
+    return http.get(`articles?author=${username}`);
+  },
   getFeedArticles() {
     return secureHttp.get("articles/feed");
   },
