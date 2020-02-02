@@ -3,53 +3,19 @@ import { AppContext } from "../AppContext";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import axios from "../helpers/axiosService";
+import Comments from "./Comments";
 
 const SpecificArticle = props => {
   const [
     currentUser,
     article,
-    comments,
     followStatus,
     toggleFollow,
     favorite,
     toggleFavorite,
     favoriteCount,
-    deleteArticle,
-    postComment,
-    deleteComment,
-    commentText,
-    onInputChangeHandler
+    deleteArticle
   ] = useSpecificArticle(props);
-
-  const renderComments = comments.map(comment => {
-    return (
-      <div data-cy="comment" key={comment.id} className="card">
-        <div className="card-block">
-          <p data-cy="comment-body">{comment.body}</p>
-        </div>
-        <div className="card-footer">
-          <a className="comment-author">
-            <img src={comment.author.image} className="comment-author-img" />
-          </a>
-          &nbsp;
-          <a className="comment-author">{comment.author.username}</a>
-          <span className="date-posted">
-            {moment(comment.createdAt).format("ddd MMM DD YYYY")}
-          </span>
-          {currentUser.username === comment.author.username && (
-            <span className="mod-options">
-              <i className="ion-edit"></i>
-              <i
-                className="ion-trash-a"
-                onClick={() => deleteComment(comment.id)}
-                data-cy="delete-comment"
-              ></i>
-            </span>
-          )}
-        </div>
-      </div>
-    );
-  });
 
   return (
     <div>
@@ -131,36 +97,7 @@ const SpecificArticle = props => {
               </div>
             </div>
             <hr />
-            <div className="row">
-              <div className="col-xs-12 col-md-8 offset-md-2">
-                <form className="card comment-form" onSubmit={postComment}>
-                  <div className="card-block">
-                    <textarea
-                      data-cy="comment-text"
-                      className="form-control"
-                      placeholder="Write a comment..."
-                      rows="3"
-                      name="commentText"
-                      onChange={onInputChangeHandler}
-                      value={commentText}
-                    ></textarea>
-                  </div>
-                  <div className="card-footer">
-                    <img
-                      src={currentUser.image}
-                      className="comment-author-img"
-                    />
-                    <button
-                      data-cy="post-comment"
-                      className="btn btn-sm btn-primary"
-                    >
-                      Post Comment
-                    </button>
-                  </div>
-                </form>
-                {renderComments}
-              </div>
-            </div>
+            <Comments currentUser={currentUser} article={article}/>
           </div>
         </div>
       )}
@@ -172,31 +109,18 @@ export default withRouter(SpecificArticle);
 
 const useSpecificArticle = props => {
   const [state, setState] = useContext(AppContext);
-  const [commentText, setCommentText] = useState();
   const [article, setArticle] = useState();
-  const [comments, setComments] = useState([]);
   const [followStatus, setFollowStatus] = useState();
   const [favorite, setFavorite] = useState();
   const [favoriteCount, setFavoriteCount] = useState(0);
   const slug = props.history.location.pathname.split("/")[2];
-  const onInputChangeHandler = e => {
-    setCommentText(e.target.value);
-  };
+
   const fetchSpecificArticle = async () => {
     const response = await axios.getSpecificArticle(slug);
     setArticle(response.data.article);
     setFollowStatus(response.data.article.author.following);
   };
-  const fetchComments = async () => {
-    try {
-      const response = await axios.getComments(slug);
-      setComments(
-        response.data.comments !== comments && response.data.comments
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   const toggleFollow = async () => {
     if (followStatus) {
       const response = await axios.unfollowUser(article.author.username);
@@ -225,45 +149,19 @@ const useSpecificArticle = props => {
       console.error(error);
     }
   };
-  const postComment = async e => {
-    e.preventDefault();
-    const comment = {
-      body: commentText
-    };
-    try {
-      const response = await axios.addComment(article.slug, comment);
-      setCommentText("")
-      fetchComments();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const deleteComment = async id => {
-    try {
-      const response = await axios.deleteComments(article.slug, id);
-      fetchComments();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   useEffect(() => {
     fetchSpecificArticle();
-    fetchComments();
   }, []);
 
   return [
     state.currentUser,
     article,
-    comments,
     followStatus,
     toggleFollow,
     favorite,
     toggleFavorite,
     favoriteCount,
-    deleteArticle,
-    postComment,
-    deleteComment,
-    commentText,
-    onInputChangeHandler
+    deleteArticle
   ];
 };

@@ -80,6 +80,27 @@ describe("Article management", () => {
     courseManagement.writeArticle(article);
     cy.url().should("contain", "/article/test-article");
   });
+  it("delete article", () => {
+    cy.url().should("not.contain", "/create");
+    cy.get("[data-cy=create-article-link]").click();
+    courseManagement.writeArticle(article);
+    cy.url().should("contain", "/article/test-article");
+    cy.route({
+      method: "DELETE",
+      url: "https://conduit.productionready.io/api/articles/test-article",
+      status: 200,
+      response: {}
+    });
+    cy.route({
+      method: "GET",
+      url: "https://conduit.productionready.io/api/articles",
+      status: 200,
+      response: "fixture:article_list_after_delete.json"
+    });
+    cy.get("[data-cy=delete-article]").click();
+    cy.get("[data-cy=globalFeed]").click();
+    cy.get("[data-cy=my-articles]").should("not.contain.text", "test article");
+  });
 
   it("update article", () => {
     cy.get("[data-cy=create-article-link]").click();
