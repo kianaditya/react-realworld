@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --browser chrome --headless"
+    "cy:run": "cypress run --browser chrome --headless",
+    "cy:test": "start-server-and-test start 3001 cy:open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,7 +40,8 @@
     "@cypress/instrument-cra": "^1.1.0",
     "babel-plugin-istanbul": "^6.0.0",
     "istanbul-lib-coverage": "^3.0.0",
-    "nyc": "^15.0.0"
+    "nyc": "^15.0.0",
+    "start-server-and-test": "^1.11.4"
   },
   "nyc": {
     "include": [
