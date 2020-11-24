@@ -135,6 +135,6 @@ describe("Article management", () => {
       }
     });
     cy.get("[data-cy=delete-comment]").click({ force: true });
-    cy.get("[data-cy=comment-body]").should("not.contain", "great post");
+    cy.get("[data-cy=comment-body]").should("not.exist");
   });
 });
