@@ -1,42 +1,44 @@
-import React, { useState, useContext } from "react";
-import { withRouter } from "react-router-dom";
-import { AppContext } from "../AppContext";
-const axios = require("axios");
+import React, { useState, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
+import { AppContext } from '../AppContext'
+const axios = require('axios')
 
-const RegistrationForm = props => {
-  const [state, setState] = useContext(AppContext);
-  const [formData, setFormData] = useState({});
+const RegistrationForm = (props) => {
+  const [state, setState] = useContext(AppContext)
+  const [formData, setFormData] = useState({})
 
-  const onInputChangeHandler = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const submitRegistration = async e => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const payload = { user: Object.fromEntries(formData) };
+  const onInputChangeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  const submitRegistration = async (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const payload = { user: Object.fromEntries(formData) }
 
     try {
       const response = await axios.post(
-        "https://conduit.productionready.io/api/users",
+        process.env.NODE_ENV === 'production'
+          ? 'https://conduit.productionready.io/api/users'
+          : 'http://localhost:3000/api/users',
         JSON.stringify(payload),
         {
           headers: {
-            "Content-Type": "application/json"
-          }
+            'Content-Type': 'application/json',
+          },
         }
-      );
+      )
       const currentUser = {
         isSignedIn: true,
-        username: response.data.user.username
-      };
-      setState(state => ({ ...state, currentUser: currentUser }));
+        username: response.data.user.username,
+      }
+      setState((state) => ({ ...state, currentUser: currentUser }))
       props.history.push({
-        pathname: "/"
-      });
+        pathname: '/',
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
   return (
     <div className="auth-page">
       <div className="container page">
@@ -90,7 +92,7 @@ const RegistrationForm = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withRouter(RegistrationForm);
+export default withRouter(RegistrationForm)

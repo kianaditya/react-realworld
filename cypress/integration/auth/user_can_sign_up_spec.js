@@ -1,11 +1,15 @@
 /// <reference types="Cypress" />
+const apiUrl = Cypress.env('apiUrl')
 describe("User can sign up", () => {
   it("User can successfully sign up", () => {
-    cy.route({
-      method: "POST",
-      url: "https://conduit.productionready.io/api/users",
-      response: "fixture:successful_registration.json"
-    });
+    // cy.route({
+    //   method: "POST",
+    //   url: "https://conduit.productionready.io/api/users",
+    //   response: "fixture:successful_registration.json"
+    // });
+    cy.intercept('POST', `${apiUrl}users`, {
+      fixture: 'successful_registration.json',
+    })
     cy.visit("/");
     cy.get("[data-cy=signUpLink]").click();
     cy.url().should("contain", "/signup");
