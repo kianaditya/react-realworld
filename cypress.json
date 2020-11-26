@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://localhost:3001",
   "env": {
-    "apiUrl": "http://localhost:3000",
+    "apiUrl": "http://localhost:3000/api/",
     "user": {
       "email": "tester@test.com",
       "password": "password1234",
@@ -10,5 +10,6 @@
   },
   "viewportHeight": 1000,
   "viewportWidth": 1000,
-  "video": false
+  "video": false,
+  "chromeWebSecurity" : false
 }

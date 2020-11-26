@@ -21,30 +21,23 @@ const apiUrl = Cypress.env('apiUrl')
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-beforeEach(()=>{
+beforeEach(() => {
   cy.server()
-  cy.route({
-    method: "GET",
-    status: 200,
-    url: "https://conduit.productionready.io/api/user",
-    response: "fixture:successful_login.json"
-  });
-  cy.route({
-    method: "GET",
-    url: "https://conduit.productionready.io/api/articles",
-    status: 200,
-    response: "fixture:article_list.json"
-  });
-  cy.route({
-    method: "GET",
-    url: "https://conduit.productionready.io/api/tags",
-    status: 200,
-    response: "fixture:tags.json"
-  });
-  cy.route({
-    method: "GET",
-    url: "https://conduit.productionready.io/api/articles/feed",
-    status: 200,
-    response: "fixture:own_article_list.json"
-  });
+
+  cy.intercept('GET', `${apiUrl}user`, {
+    statusCode: 200,
+    fixture: 'successful_login.json',
+  })
+  cy.intercept('GET', `${apiUrl}articles`, {
+    statusCode: 200,
+    fixture: 'article_list.json',
+  })
+  cy.intercept('GET', `${apiUrl}tags`, {
+    statusCode: 200,
+    fixture: 'tags.json',
+  })
+  cy.intercept('GET', `${apiUrl}articles/feed`, {
+    statusCode: 200,
+    fixture: 'own_article_list.json',
+  })
 })
