@@ -48,7 +48,7 @@ describe('User can visit user profile', () => {
     cy.get('[data-cy=article-title]')
       .last()
       .should('contain.text', 'How to your dragon 2')
-    cy.get('[data-cy=my-articles]').click()
+    cy.get('[data-cy=my-articles]').click({force: true})
     cy.get('[data-cy=article-title]')
       .last()
       .should('contain.text', 'How to your dragon 2')

@@ -4,7 +4,7 @@ import { AppContext } from "./AppContext";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ArticleList from "./components/ArticleList";
+import ArticleListContainer from "./components/article-list/ArticleListContainer";
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm.jsx";
 import SpecificArticle from "./components/SpecificArticle.jsx";
@@ -34,7 +34,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path="/" render={() => <ArticleList />} />
+        <Route exact path="/" render={() => <ArticleListContainer />} />
         <Route exact path="/profile/:username" render={() => <Profile />} />
         <Route exact path="/signup" render={() => <RegistrationForm />} />
         <Route exact path="/login" render={() => <LoginForm />} />
