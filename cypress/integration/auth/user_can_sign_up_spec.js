@@ -7,6 +7,14 @@ describe("User can sign up", () => {
     //   url: "https://conduit.productionready.io/api/users",
     //   response: "fixture:successful_registration.json"
     // });
+    cy.intercept('GET', `${apiUrl}articles`, {
+      statusCode: 200,
+      fixture: 'article_list.json',
+    })
+    cy.intercept('GET', `${apiUrl}tags`, {
+      statusCode: 200,
+      fixture: 'tags.json',
+    })
     cy.intercept('POST', `${apiUrl}users`, {
       fixture: 'successful_registration.json',
     })
