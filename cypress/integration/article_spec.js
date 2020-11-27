@@ -1,10 +1,25 @@
 ///  <reference types="Cypress" />
 import testArticle from '../fixtures/test_article.json'
 import updatedTestArticle from '../fixtures/updated_test_article.json'
+import postComment from '../fixtures/comments.json'
 
 const apiUrl = Cypress.env('apiUrl')
 
 let getTestArticleResponse = testArticle
+let commentResponse = postComment
+
+const article = {
+  title: 'test title',
+  description: 'about test',
+  body: 'This is a test post',
+  tagList: ['test'],
+}
+const updatedArticle = {
+  title: 'test title 2',
+  description: 'about test 2',
+  body: 'This is a test post 2',
+  tagList: ['test2'],
+}
 
 describe('Article management', () => {
   beforeEach(() => {
@@ -12,6 +27,9 @@ describe('Article management', () => {
       statusCode: 200,
       fixture: 'successful_login.json',
     })
+    cy.intercept('GET', `${apiUrl}articles/test-article/comments`, (req) => {
+      req.reply(commentResponse)
+    }).as('getComment')
     cy.intercept('GET', `${apiUrl}articles/test-article`, (req) => {
       req.reply(getTestArticleResponse)
     }).as('getTestArticle')
@@ -29,24 +47,14 @@ describe('Article management', () => {
       fixture: 'test_article.json',
     })
 
-    cy.intercept('GET', `${apiUrl}articles/test-article`, {
-      fixture: 'test_article.json',
-    })
     cy.intercept('PUT', `${apiUrl}articles/test-article`, {
       fixture: 'updated_test_article.json',
     })
-    cy.route({
-      method: 'POST',
-      url:
-        'https://conduit.productionready.io/api/articles/test-article/comments',
-      response: 'fixture:comments.json',
-    })
-    cy.route({
-      method: 'GET',
-      url:
-        'https://conduit.productionready.io/api/articles/test-article/comments',
-      response: 'fixture:comments.json',
-    })
+
+    cy.intercept('POST', `${apiUrl}articles/test-article/comments`, (req) => {
+      req.reply(commentResponse)
+    }).as('postComment')
+
     cy.intercept('DELETE', `${apiUrl}articles/test-article`, {
       statusCode: 200,
     })
@@ -56,18 +64,7 @@ describe('Article management', () => {
       },
     })
   })
-  const article = {
-    title: 'test title',
-    description: 'about test',
-    body: 'This is a test post',
-    tagList: ['test'],
-  }
-  const updatedArticle = {
-    title: 'test title 2',
-    description: 'about test 2',
-    body: 'This is a test post 2',
-    tagList: ['test2'],
-  }
+
   const tagsToCypress = (tags) => tags.join('{enter}') + '{enter}'
   const courseManagement = {
     writeArticle(article) {
@@ -106,7 +103,7 @@ describe('Article management', () => {
     cy.get('[data-cy=my-articles]').should('not.contain.text', 'test article')
   })
 
-  it.only('update article', () => {
+  it('update article', () => {
     cy.intercept('GET', `${apiUrl}articles/test-article`, {
       fixture: 'updated_test_article.json',
     })
@@ -132,13 +129,11 @@ describe('Article management', () => {
 
     courseManagement.writeComment('great post')
     cy.contains('[data-cy=comment]', 'great post').should('be.visible')
-    cy.route({
-      method: 'GET',
-      url:
-        'https://conduit.productionready.io/api/articles/test-article/comments',
-      response: {
+
+    cy.wait('@getComment').then(() => {
+      commentResponse = {
         comments: [],
-      },
+      }
     })
     cy.get('[data-cy=delete-comment]').click({ force: true })
     cy.get('[data-cy=comment-body]').should('not.exist')
