@@ -3,6 +3,14 @@ const apiUrl = Cypress.env('apiUrl')
 
 describe('User can update profile', () => {
   it('User can successfully update profile', () => {
+    cy.intercept('GET', `${apiUrl}articles`, {
+      statusCode: 200,
+      fixture: 'article_list.json',
+    })
+    cy.intercept('GET', `${apiUrl}tags`, {
+      statusCode: 200,
+      fixture: 'tags.json',
+    })
     cy.intercept('PUT', `${apiUrl}user`, {
       statusCode: 200,
       fixture: 'successful_user_update.json',
