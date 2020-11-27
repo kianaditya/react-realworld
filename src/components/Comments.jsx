@@ -10,7 +10,7 @@ const Comments = ({currentUser, article}) => {
     deleteComment,
     onInputChangeHandler
   ] = useCommentsHook(article);
-  const renderComments = comments.map(comment => {
+  const renderComments = comments && comments.map(comment => {
     return (
       <div data-cy="comment" key={comment.id} className="card">
         <div className="card-block">

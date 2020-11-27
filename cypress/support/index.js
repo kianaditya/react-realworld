@@ -24,20 +24,23 @@ const apiUrl = Cypress.env('apiUrl')
 beforeEach(() => {
   cy.server()
 
-  cy.intercept('GET', `${apiUrl}user`, {
-    statusCode: 200,
-    fixture: 'successful_login.json',
-  })
-  cy.intercept('GET', `${apiUrl}articles`, {
-    statusCode: 200,
-    fixture: 'article_list.json',
-  })
-  cy.intercept('GET', `${apiUrl}tags`, {
-    statusCode: 200,
-    fixture: 'tags.json',
-  })
-  cy.intercept('GET', `${apiUrl}articles/feed`, {
-    statusCode: 200,
-    fixture: 'own_article_list.json',
-  })
+  // cy.intercept('GET', `${apiUrl}user`, {
+  //   statusCode: 200,
+  //   fixture: 'successful_login.json',
+  // })
+  // cy.intercept('GET', `${apiUrl}articles/test-article`, {
+  //   fixture: 'test_article.json',
+  // })
+  // cy.intercept('GET', `${apiUrl}articles`, {
+  //   statusCode: 200,
+  //   fixture: 'article_list.json',
+  // })
+  // cy.intercept('GET', `${apiUrl}tags`, {
+  //   statusCode: 200,
+  //   fixture: 'tags.json',
+  // })
+  // cy.intercept('GET', `${apiUrl}articles/feed`, {
+  //   statusCode: 200,
+  //   fixture: 'own_article_list.json',
+  // })
 })
