@@ -1,32 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import axios from "../helpers/axiosService";
+import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+import axios from '../helpers/axiosService'
 
-const ArticleManagementForm = props => {
-  const [formData, setFormData] = useState({});
-  const isCreate = props.match.params.action === "create";
-  useEffect(() => {
-    !isCreate && setFormData(props.location.state.article);
-  }, []);
-
-  const onInputChangeHandler = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const submitArticle = async e => {
-    e.preventDefault();
-    const payload = { article: formData };
-
-    try {
-      const response = isCreate
-        ? await axios.createArticle(payload)
-        : await axios.updateArticle(props.location.state.article.slug, payload);
-      props.history.push({
-        pathname: `/article/${response.data.article.slug}`
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const ArticleManagementForm = (props) => {
+  const [
+    formData,
+    onInputChangeHandler,
+    submitArticle,
+  ] = useArticleManagementHook(props)
   return (
     <div className="editor-page">
       <div className="container page">
@@ -87,7 +68,36 @@ const ArticleManagementForm = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withRouter(ArticleManagementForm);
+export default withRouter(ArticleManagementForm)
+
+const useArticleManagementHook = (props) => {
+  const [formData, setFormData] = useState({})
+  const isCreate = props.match.params.action === 'create'
+  useEffect(() => {
+    !isCreate && setFormData(props.location.state.article)
+  }, [])
+
+  const onInputChangeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  const submitArticle = async (e) => {
+    e.preventDefault()
+    const payload = { article: formData }
+
+    try {
+      const response = isCreate
+        ? await axios.createArticle(payload)
+        : await axios.updateArticle(props.location.state.article.slug, payload)
+      props.history.push({
+        pathname: `/article/${response.data.article.slug}`,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  return [formData, onInputChangeHandler, submitArticle]
+}
