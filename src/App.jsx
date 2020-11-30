@@ -4,15 +4,15 @@ import { AppContext } from "./AppContext";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ArticleListContainer from "./components/article-list/ArticleListContainer";
+import ArticleListContainer from "./components/article-display/ArticleListContainer";
 import RegistrationForm from "./components/forms/auth/RegistrationForm";
-import LoginForm from "./components/forms/auth/LoginForm";
-import SpecificArticle from "./components/SpecificArticle.jsx";
+import LoginForm from "./components/forms/auth/LoginForm.jsx";
+import SpecificArticle from "./components/article-display/SpecificArticle";
 import axios from "./helpers/axiosService";
 import { getToken } from "./helpers/localStorage";
 import Settings from "./components/forms/Settings";
 import ArticleManagementForm from "./components/forms/ArticleManagementForm";
-import Profile from "./components/Profile";
+import Profile from "./components/user/Profile";
 
 const App = () => {
   const [state, setState] = useContext(AppContext);

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
-import axiosService from "../helpers/axiosService";
-import { AppContext } from "../AppContext";
+import axiosService from "../../helpers/axiosService";
+import { AppContext } from "../../AppContext";
 
 const Profile = props => {
   const [state, setState] = useContext(AppContext);

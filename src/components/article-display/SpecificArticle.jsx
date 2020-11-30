@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../../AppContext";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import axios from "../helpers/axiosService";
+import axios from "../../helpers/axiosService";
 import Comments from "./Comments";
 
 const SpecificArticle = props => {
