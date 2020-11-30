@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import axios from "../helpers/axiosService";
+import axios from "../../helpers/axiosService";
 
 const Comments = ({currentUser, article}) => {
   const [
