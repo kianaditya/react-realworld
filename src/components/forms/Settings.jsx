@@ -1,43 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
 
-import axios from "../helpers/axiosService";
-import { AppContext } from "../AppContext";
-import { deleteToken } from "../helpers/localStorage";
+import axios from '../../helpers/axiosService'
+import { AppContext } from '../../AppContext'
+import { deleteToken } from '../../helpers/localStorage'
 
-const Settings = props => {
-  const [state, setState] = useContext(AppContext);
-  const [formData, setFormData] = useState({});
-  useEffect(() => {
-    setFormData(state.currentUser);
-  }, [state]);
-  const onInputChangeHandler = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const updateUser = async e => {
-    e.preventDefault();
-    const payload = { user: formData };
-    try {
-      const response = await axios.updateUser(payload);
-      const currentUser = {
-        isSignedIn: true,
-        username: response.data.user.username
-      };
-      setState(state => ({ ...state, currentUser: currentUser }));
-      props.history.push({
-        pathname: "/"
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const logoutUser = () => {
-    deleteToken();
-    setState(state => ({ ...state, currentUser: { isSignedIn: false } }));
-    props.history.push({
-      pathname: "/"
-    });
-  };
+const Settings = (props) => {
+  const [
+    formData,
+    updateUser,
+    logoutUser,
+    onInputChangeHandler,
+  ] = useSettingsHook(props)
   return (
     <div className="settings-page">
       <div className="container page">
@@ -90,7 +64,10 @@ const Settings = props => {
                 onChange={onInputChangeHandler}
                 data-cy="password"
               />
-              <button data-cy="updateProfile" className="btn btn-lg btn-primary pull-xs-right">
+              <button
+                data-cy="updateProfile"
+                className="btn btn-lg btn-primary pull-xs-right"
+              >
                 Update Settings
               </button>
             </form>
@@ -108,7 +85,44 @@ const Settings = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withRouter(Settings);
+export default withRouter(Settings)
+
+const useSettingsHook = (props) => {
+  const [state, setState] = useContext(AppContext)
+  const [formData, setFormData] = useState({})
+  useEffect(() => {
+    setFormData(state.currentUser)
+  }, [state])
+  const onInputChangeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  const updateUser = async (e) => {
+    e.preventDefault()
+    const payload = { user: formData }
+    try {
+      const response = await axios.updateUser(payload)
+      const currentUser = {
+        isSignedIn: true,
+        username: response.data.user.username,
+      }
+      setState((state) => ({ ...state, currentUser: currentUser }))
+      props.history.push({
+        pathname: '/',
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  const logoutUser = () => {
+    deleteToken()
+    setState((state) => ({ ...state, currentUser: { isSignedIn: false } }))
+    props.history.push({
+      pathname: '/',
+    })
+  }
+
+  return [formData, updateUser, logoutUser, onInputChangeHandler]
+}
