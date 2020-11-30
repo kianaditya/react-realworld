@@ -2,10 +2,10 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import AuthFormContainer from './AuthFormContainer'
-import { useLoginForm } from './authHooks'
+import useFormHook from '../formHooks'
 
 const LoginForm = (props) => {
-  const [submitLogin, formData, onInputChangeHandler] = useLoginForm(props)
+  const {submitLogin, formData, onInputChangeHandler} = useFormHook(props)
 
   return (
     <AuthFormContainer>

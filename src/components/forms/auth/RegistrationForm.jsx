@@ -2,14 +2,14 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import AuthFormContainer from './AuthFormContainer'
-import { useRegistrationForm } from './authHooks'
+import useFormHook from '../formHooks'
 
 const RegistrationForm = (props) => {
-  const [
+  const {
     submitRegistration,
     onInputChangeHandler,
     formData,
-  ] = useRegistrationForm(props)
+ } = useFormHook(props)
   return (
     <AuthFormContainer>
       <h1 className="text-xs-center">Sign up</h1>
