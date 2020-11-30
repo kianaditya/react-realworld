@@ -6,6 +6,22 @@ describe('User can login', () => {
     cy.intercept('POST', `${apiUrl}users/login`, {
       fixture: 'successful_login.json',
     })
+    cy.intercept('GET', `${apiUrl}user`, {
+    statusCode: 200,
+    fixture: 'successful_login.json',
+  })
+  cy.intercept('GET', `${apiUrl}articles`, {
+    statusCode: 200,
+    fixture: 'article_list.json',
+  })
+  cy.intercept('GET', `${apiUrl}tags`, {
+    statusCode: 200,
+    fixture: 'tags.json',
+  })
+  cy.intercept('GET', `${apiUrl}articles/feed`, {
+    statusCode: 200,
+    fixture: 'own_article_list.json',
+  })
     cy.visit('/')
     cy.get('[data-cy=loginLink]').click()
     cy.url().should('contain', '/login')

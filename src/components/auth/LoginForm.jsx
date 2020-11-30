@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { AppContext } from "../AppContext";
-import axios from "../helpers/axiosService";
-import { setToken } from "../helpers/localStorage";
+import { AppContext } from "../../AppContext";
+import axios from "../../helpers/axiosService";
+import { setToken } from "../../helpers/localStorage";
 
 const LoginForm = props => {
   const [state, setState] = useContext(AppContext);

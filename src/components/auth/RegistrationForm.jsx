@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
-import { AppContext } from '../AppContext'
+import { AppContext } from '../../AppContext'
 const axios = require('axios')
 
 const RegistrationForm = (props) => {
