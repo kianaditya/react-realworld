@@ -5,13 +5,13 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ArticleListContainer from "./components/article-list/ArticleListContainer";
-import RegistrationForm from "./components/auth/RegistrationForm";
-import LoginForm from "./components/auth/LoginForm";
+import RegistrationForm from "./components/forms/auth/RegistrationForm";
+import LoginForm from "./components/forms/auth/LoginForm";
 import SpecificArticle from "./components/SpecificArticle.jsx";
 import axios from "./helpers/axiosService";
 import { getToken } from "./helpers/localStorage";
-import Settings from "./components/Settings";
-import ArticleManagementForm from "./components/ArticleManagementForm";
+import Settings from "./components/forms/Settings";
+import ArticleManagementForm from "./components/forms/ArticleManagementForm";
 import Profile from "./components/Profile";
 
 const App = () => {

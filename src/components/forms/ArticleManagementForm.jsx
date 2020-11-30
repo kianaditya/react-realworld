@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import axios from '../helpers/axiosService'
+import axios from '../../helpers/axiosService'
 
 const ArticleManagementForm = (props) => {
   const [
