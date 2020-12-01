@@ -21,7 +21,7 @@ const ArticleManagementForm = (props) => {
                 placeholder="Article Title"
                 name="title"
                 onChange={onInputChangeHandler}
-                data-cy="article-title"
+                data-cy="article-title-input"
                 value={formData.title}
               />
 
