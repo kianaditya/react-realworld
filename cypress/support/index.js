@@ -17,30 +17,40 @@
 import './commands'
 import '@cypress/code-coverage/support'
 
-const apiUrl = Cypress.env('apiUrl')
+import loginResponse from '../fixtures/successful_login.json'
+
+const successfulLogin = loginResponse
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 beforeEach(() => {
-  cy.server()
+  cy.intercept('POST', '**/login', {
+    fixture: 'successful_login.json',
+  }).as('login')
 
-  // cy.intercept('GET', `${apiUrl}user`, {
-  //   statusCode: 200,
-  //   fixture: 'successful_login.json',
-  // })
-  // cy.intercept('GET', `${apiUrl}articles/test-article`, {
-  //   fixture: 'test_article.json',
-  // })
-  // cy.intercept('GET', `${apiUrl}articles`, {
-  //   statusCode: 200,
-  //   fixture: 'article_list.json',
-  // })
-  // cy.intercept('GET', `${apiUrl}tags`, {
-  //   statusCode: 200,
-  //   fixture: 'tags.json',
-  // })
-  // cy.intercept('GET', `${apiUrl}articles/feed`, {
-  //   statusCode: 200,
-  //   fixture: 'own_article_list.json',
-  // })
+  cy.intercept('GET', '**/articles', {
+    statusCode: 200,
+    fixture: 'article_list.json',
+  }).as('getArticleList')
+
+  cy.intercept('GET', '**/tags', {
+    statusCode: 200,
+    fixture: 'tags.json',
+  }).as('getTags')
+
+  cy.intercept('GET', '**/articles/feed', {
+    statusCode: 200,
+    fixture: 'own_article_list.json',
+  }).as('getOwnFeed')
+
+  cy.intercept('POST', '**/users', {
+    fixture: 'successful_registration.json',
+  }).as('successfulRegistration')
+
+  cy.intercept('GET', '**/user', successfulLogin).as('successfulLogin')
+
+  cy.intercept('PUT', '**/user', {
+    statusCode: 200,
+    fixture: 'successful_user_update.json',
+  }).as('updateUser')
 })

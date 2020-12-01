@@ -16,7 +16,7 @@ const SpecificArticle = props => {
     favoriteCount,
     deleteArticle
   ] = useSpecificArticle(props);
-
+debugger
   return (
     <div>
       {article && (
