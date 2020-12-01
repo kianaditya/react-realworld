@@ -68,7 +68,7 @@ describe('Article management', () => {
   const tagsToCypress = (tags) => tags.join('{enter}') + '{enter}'
   const courseManagement = {
     writeArticle(article) {
-      cy.get('[data-cy=article-title]').clear().type(article.title)
+      cy.get('[data-cy=article-title-input]').clear().type(article.title)
       cy.get('[data-cy=article-description]').clear().type(article.description)
       cy.get('[data-cy=article-body]').clear().type(article.body)
       cy.get('[data-cy=article-tags]')
