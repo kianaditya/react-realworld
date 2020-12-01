@@ -23,49 +23,41 @@ const updatedArticle = {
 
 describe('Article management', () => {
   beforeEach(() => {
-    cy.intercept('GET', `${apiUrl}user`, {
-      statusCode: 200,
-      fixture: 'successful_login.json',
-    })
-    cy.intercept('GET', `${apiUrl}articles/test-article/comments`, (req) => {
-      req.reply(commentResponse)
-    }).as('getComment')
-    cy.intercept('GET', `${apiUrl}articles/test-article`, (req) => {
+    cy.intercept('GET', '**/articles/test-article', (req) => {
       req.reply(getTestArticleResponse)
     }).as('getTestArticle')
-    cy.intercept('GET', `${apiUrl}articles`, {
-      statusCode: 200,
-      fixture: 'article_list.json',
-    })
-    cy.intercept('GET', `${apiUrl}tags`, {
-      statusCode: 200,
-      fixture: 'tags.json',
-    })
-    cy.login()
 
-    cy.intercept('POST', `${apiUrl}articles`, {
+    cy.intercept('GET', '**/articles/test-article/comments', (req) => {
+      req.reply(commentResponse)
+    }).as('getComment')
+
+    cy.intercept('POST', '**/articles', {
       fixture: 'test_article.json',
-    })
+    }).as('postArticle')
 
-    cy.intercept('PUT', `${apiUrl}articles/test-article`, {
+    cy.intercept('PUT', '**/articles/test-article', {
       fixture: 'updated_test_article.json',
-    })
+    }).as('updateTestArticle')
 
-    cy.intercept('POST', `${apiUrl}articles/test-article/comments`, (req) => {
+    cy.intercept('POST', '**/articles/test-article/comments', (req) => {
       req.reply(commentResponse)
     }).as('postComment')
 
-    cy.intercept('DELETE', `${apiUrl}articles/test-article`, {
+    cy.intercept('DELETE', '**/articles/test-article', {
       statusCode: 200,
-    })
-    cy.intercept('DELETE', `${apiUrl}articles/test-article/comments/53676`, {
+    }).as('deleteArticle')
+
+    cy.intercept('DELETE', '**/articles/test-article/comments/**', {
       body: {
         comments: [],
       },
-    })
+    }).as('deleteComment')
+
+    cy.login()
   })
 
   const tagsToCypress = (tags) => tags.join('{enter}') + '{enter}'
+
   const courseManagement = {
     writeArticle(article) {
       cy.get('[data-cy=article-title-input]').clear().type(article.title)
@@ -88,6 +80,7 @@ describe('Article management', () => {
     courseManagement.writeArticle(article)
     cy.url().should('contain', '/article/test-article')
   })
+
   it('delete article', () => {
     cy.url().should('not.contain', '/create')
     cy.get('[data-cy=create-article-link]').click()

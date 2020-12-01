@@ -25,11 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 const apiUrl = Cypress.env('apiUrl')
 
+
+
 Cypress.Commands.add('loggedInAs', (user = Cypress.env('user')) => {
-  cy.intercept('POST', `${apiUrl}users/login`, {
-    statusCode: 200,
-    fixture: 'successful_login.json',
-  })
   cy.visit('/')
   cy.get('[data-cy=create-article-link]').should('not.exist')
   cy.get('[data-cy=loginLink]').click()
@@ -44,13 +42,17 @@ Cypress.Commands.add('loggedInAs', (user = Cypress.env('user')) => {
 })
 
 Cypress.Commands.add('login', () => {
-  cy.intercept('GET', `${apiUrl}user`, {
-    statusCode: 200,
-    fixture: 'successful_login.json',
-  })
   window.localStorage.setItem(
     'token',
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ODEyNjgsInVzZXJuYW1lIjoiSm9obiBEb2UxMjMxMiIsImV4cCI6MTU4NTY2NTMxNH0.trFBjnvXoUAM5W82qVd-71_PMra3byUV60jLNkEIhj8'
   )
   cy.visit('/')
+})
+
+Cypress.Commands.add('login2', () => {
+  window.localStorage.setItem(
+    'token',
+    'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEyMzQ1NiIsImV4cCI6IjE1ODU2NjUzMTQiLCJ1c2VybmFtZSI6InRlc3QyQG1haWwuY29tIn0.B6SOxk8Vj6kZxzXYenGDZ2JXYlAHfC5VaU0WVnE0788'
+  )
+  // cy.visit('/')
 })
