@@ -41,7 +41,7 @@
     "babel-plugin-istanbul": "^6.0.0",
     "istanbul-lib-coverage": "^3.0.0",
     "nyc": "^15.0.0",
-    "start-server-and-test": "^1.11.4"
+    "start-server-and-test": "^1.12.1"
   },
   "nyc": {
     "include": [
